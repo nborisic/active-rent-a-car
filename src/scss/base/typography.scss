@@ -1,0 +1,32 @@
+html {
+    -webkit-font-smoothing: antialiased;
+    font-family: $font-family-sans-serif;
+    font-size: 10px;
+  }
+  
+  // Mixins
+  @mixin large-text {
+    font-size: 3.5rem;
+    line-height: 4rem;
+  
+    @include lg {
+      font-size: 10rem;
+      line-height: 12rem;
+    }
+  }
+  
+  @mixin body-copy {
+    font-size: 1.8rem;
+    line-height: 2.5rem;
+  
+    @include lg {
+      font-size: 3rem;
+      line-height: 4rem;
+    }
+  }
+  
+  
+  body {
+    @include body-copy;
+  }
+  

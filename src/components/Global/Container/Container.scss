@@ -1,0 +1,15 @@
+@import "../../../scss/base";
+
+.Container {
+  box-sizing: content-box;
+  margin: 0 auto;
+  width: $container-width-sm;
+
+  @include md {
+    width: $container-width-md;
+  }
+
+  @include lg {
+    width: $container-width-lg;
+  }
+}

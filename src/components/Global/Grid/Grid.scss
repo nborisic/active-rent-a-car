@@ -1,0 +1,19 @@
+@import "../../../scss/base";
+
+.Grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 ($col-gutter / 2) * -1;
+}
+
+.Grid--centered {
+  justify-content: center;
+}
+
+.Grid--rightAligned {
+  justify-content: flex-end;
+}
+
+.Grid--justified {
+  justify-content: space-between;
+}

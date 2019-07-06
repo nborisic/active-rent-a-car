@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html",
+    "postbuild": "react-snap"
   },
   "browserslist": [
     "ie 10",
@@ -16,10 +17,30 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "parcel-bundler": "^1.12.3"
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "parcel-bundler": "^1.12.3",
+    "react-snap": "^1.23.0"
   },
   "dependencies": {
     "browserlist": "^1.0.1",
-    "node-sass": "^4.12.0"
+    "classnames": "^2.2.6",
+    "contentful": "^7.8.1",
+    "lodash": "^4.17.11",
+    "node-sass": "^4.12.0",
+    "react": "^16.8.6",
+    "react-burger-menu": "^2.6.10",
+    "react-dom": "^16.8.6",
+    "react-hot-loader": "^4.12.0",
+    "react-id-swiper": "^2.3.1",
+    "react-redux": "^7.1.0",
+    "react-router-dom": "^5.0.1",
+    "react-window-decorators": "^1.0.6",
+    "redux": "^4.0.1",
+    "redux-saga": "^1.0.5",
+    "redux-spark": "0.0.5",
+    "smoothscroll-polyfill": "^0.4.4"
   }
 }

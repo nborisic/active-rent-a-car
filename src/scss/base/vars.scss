@@ -1,0 +1,39 @@
+$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+// ------ Colors
+$time: 500ms;
+
+// ------ Colors
+$black: #000;
+$white: #fff;
+$turquoise: #87DBE1;
+
+// ------ Breakpoints
+$breakpoint-lg: 1200px;
+$breakpoint-md: 600px;
+
+// Grid
+$grid-col-count-sm: 4;
+$grid-col-count-md: 9;
+$grid-col-count-lg: 12;
+
+$col-gutter: 2rem;
+
+// on change of $container-width-xx adjust $grid-page-padding-xx
+$container-width-sm: 85.33%;
+$container-width-md: 84.63%;
+$container-width-lg: 73.61%;
+$container-width-xl: 74.22%;
+
+// Navigation
+$grid-page-height-sm: 22rem;
+$grid-page-height-md: 22rem;
+$grid-page-height-lg: 36rem;
+$grid-page-height-xl: 65rem;
+
+// These need to match JavaScript variables in pages/Navigation/utils.ts
+// and be equal to 100 - $container-width-xx
+$grid-page-padding-sm: 7.335%;
+$grid-page-padding-md: 7.685%;
+$grid-page-padding-lg: 13.195%;
+$grid-page-padding-xl: 12.89%;

@@ -1,0 +1,36 @@
+@import "../../../scss/base";
+
+@mixin grid-generate-columns($grid-col-count, $postfix) {
+
+
+  @for $i from 0 through $grid-col-count {
+    .Col--#{$postfix}-#{$i} {
+      @include flex-basis($i * (100% / $grid-col-count));
+    }
+
+    .Offset--#{$postfix}-#{$i} {
+      margin-left: $i * (100% / $grid-col-count);
+    }
+  }
+}
+
+// Group all column classes
+.Col,
+[class*=Col--] {
+  @include flex-basis(100%);
+  padding: 0 $col-gutter / 2;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@include grid-generate-columns($grid-col-count-sm, 'sm');
+
+@include md {
+  @include grid-generate-columns($grid-col-count-md, 'md');
+}
+
+@include lg {
+  @include grid-generate-columns($grid-col-count-lg, 'lg');
+}
+
+
