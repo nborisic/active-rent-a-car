@@ -3,6 +3,6 @@ export const accessToken = 'OmwVAgpisMygPJqPS35xG8cAlOuTT6TMRO_Y4UE3c-k';
 
 
 export const locales = {
-    '/': 'sr-Latn',
-    '/en': 'en-US',
+    'sr': 'sr-Latn',
+    'en': 'en-US',
 }

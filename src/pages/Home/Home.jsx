@@ -19,57 +19,80 @@ class Home extends Component {
   constructor(props) {
     super(props);
 
-    if(!props.homeData.aboutUs) {
-      const entriesToGet = ['aboutUs', 'carousel', 'discountActions', 'carsInStoc', 'footer', 'navBar', 'header'].join(',', ',');
+    const locale = props.match.params.language ? locales[props.match.params.language] : locales.sr;
 
-      const client = contentful.createClient({
-        space: spaceId,
-        accessToken: accessToken,
-      })
-
-      client.getEntries({
-        include: 10,
-        'sys.contentType.sys.id[in]': entriesToGet,
-        // locale: locales[locale],
-      })
-      .then((response) => {
-        props.dispatch(getData(response.items))
-      })
-      .catch(console.error)
+    if(!props.homeData[locale].aboutUs) {
+      this.getContentfulData(locale)
     }
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      match: {
+        params: {
+          language,
+        }
+      }
+    } = this.props;
+
+    const locale = language ? locales[language] : locales.sr;
+
+    if(prevProps.match.params.language !== language && !this.props.homeData[locale].aboutUs) {
+      this.getContentfulData(locale)
+    }
+
+  }
+
+  getContentfulData = (locale) => {
+    const entriesToGet = ['aboutUs', 'carousel', 'discountActions', 'carsInStoc', 'footer', 'navBar', 'header'].join(',', ',');
+
+    const client = contentful.createClient({
+      space: spaceId,
+      accessToken: accessToken,
+    });
+
+    client.getEntries({
+      include: 10,
+      'sys.contentType.sys.id[in]': entriesToGet,
+      locale,
+    })
+    .then((response) => {
+      console.log('responce', response);
+
+      this.props.dispatch(getData(response.items, locale))
+    })
+    .catch(console.error)
   }
 
   render() {
     const {
-      homeData: {
-        navBar,
-        carouselImages,
-        header,
-        cars,
-        discount,
-        aboutUs,
-        footer,
-      },
+      homeData,
       breakpoint,
+      match: {
+        params: {
+          language,
+        }
+      }
     } = this.props;
 
-    const body = documentToHtmlString(aboutUs || '');
-    console.log('navBar',navBar);
+    const locale = locales[language] ? locales[language] : 'sr-Latn';
+
+    const body = documentToHtmlString(homeData[locale].aboutUs || '');
 
     return (
       <Fragment>
-        <Header data={ header }/>
+        <Header data={ homeData[locale].header }/>
         <NavBar
-          data={ navBar }
+          data={ homeData[locale].navBar }
           breakpoint={ breakpoint }
         />
-        <Carousel images={ carouselImages }/>
+        <Carousel images={ homeData[locale].carouselImages }/>
         <Container>
           <div dangerouslySetInnerHTML={ { __html: body } }></div>
         </Container>
-        <Discount data={ discount } />
-        <Cars data={ cars } />
-        <Footer data={ footer } logo={ get(header, 'logo.fields.file.url') }/>
+        <Discount data={ homeData[locale].discount } />
+        <Cars data={ homeData[locale].cars } />
+        <Footer data={ homeData[locale].footer } logo={ get(homeData[locale].header, 'logo.fields.file.url') }/>
       </Fragment>
     );
   }

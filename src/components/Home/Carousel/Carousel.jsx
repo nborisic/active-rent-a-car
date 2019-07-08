@@ -14,6 +14,9 @@ class Carousel extends Component {
     } = this.props;
 
     return images.map(image => {
+      console.log( image.fields.file.url );
+
+
       return (
         <div
           key={ image.fields.file.url }
@@ -26,8 +29,7 @@ class Carousel extends Component {
 
   render() {
     const params = {
-      slidesPerView: 1,
-      rebuildOnUpdate: true,
+      shouldSwiperUpdate: true,
       pagination: {
         el: '.swiper-pagination',
         type: 'bullets',
@@ -37,9 +39,6 @@ class Carousel extends Component {
       autoplay: true,
       delay: 6000,
     }
-
-    console.log(this.props.images);
-
 
     return(
       <Ratio

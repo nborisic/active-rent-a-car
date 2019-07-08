@@ -1,14 +1,18 @@
 import React, { Component, Fragment } from 'react';
-import Container from '../../Global/Container/Container';
 import Ratio from 'react-ratio';
+import { Link } from 'react-router-dom';
+import Container from '../../Global/Container/Container';
 import Telephone from '../../../assets/telephone.svg';
 import Whatsapp from '../../../assets/whatsapp.svg';
 import Viber from '../../../assets/viber.svg';
 import RsFlag from '../../../assets/rs-flag.svg';
 import GrbFlag from '../../../assets/grb-flag.svg';
 import Mail from '../../../assets/mail.svg';
+import { routeCodes } from '../../../constants/routes';
+
 
 import './Header.scss';
+import { getRoute } from '../../../constants/routes';
 
 class Header extends Component {
   renderContacts = (telephone, mail) => {
@@ -47,25 +51,28 @@ class Header extends Component {
     })
   }
 
+  handleLanguageChange = (event) => {
+    console.log(event);
+
+  }
+
   renderFlags = () => {
     return (
       <Fragment>
-        <button
+        <Link
+          to={ getRoute(routeCodes.HOME, { language: 'en' }) }
           className='Header-flag'
           type='button'
-          id='eng-flag'
-          value='english'
         >
           <GrbFlag />
-        </button>
-        <button
+        </Link>
+        <Link
+          to={ getRoute(routeCodes.HOME, { language: 'sr' }) }
           className='Header-flag'
           type='button'
-          id='rs-flag'
-          value='serbia'
         >
           <RsFlag />
-        </button>
+        </Link>
       </Fragment>
     );
   }

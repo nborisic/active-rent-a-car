@@ -13,8 +13,6 @@ class Footer extends Component {
       logo,
     } = this.props;
 
-    console.log('footer',data);
-
     const priceListLabel = 'Price list';
     const rentalConditionsLabel = 'Rental conditions';
     const addressLabel = 'Address';
