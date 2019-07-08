@@ -11,6 +11,7 @@ const sectionMap = {
     discount: 'discount',
     address: 'footer',
     carouselImages: 'carouselImages',
+    logo: 'header'
 }
 
 export const getHomeDataReducer = new Reducer('newsList', {
@@ -21,6 +22,7 @@ export const getHomeDataReducer = new Reducer('newsList', {
       navBar: [],
       discount: '',
       carouselImages: [],
+      header: null,
     },
 });
 
@@ -30,7 +32,7 @@ const get = getHomeDataReducer.addAction('saveData', (state, action) => {
     action.data.forEach(item => {
         Object.keys(sectionMap).forEach(key => {
             if (item.fields[key]) {
-                if (key === 'address') {
+                if (key === 'address' || key === 'logo') {
                     data[sectionMap[key]] = item.fields;
                 } else {
                     data[sectionMap[key]] = item.fields[key];
@@ -40,7 +42,7 @@ const get = getHomeDataReducer.addAction('saveData', (state, action) => {
     });
 
     console.log('data', data);
-    
+
 
     return {
       data,

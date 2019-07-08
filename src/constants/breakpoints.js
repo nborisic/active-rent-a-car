@@ -1,11 +1,11 @@
-// Breakpoints need to match ones defined in "variables.scss"
+// Breakpoints need to match ones defined in "var.scss"
 export const MEDIA_QUERIES = {
     SM: '(min-width: 0)',
     MD: '(min-width: 600px)',
     LG: '(min-width: 1100px)',
     XL: '(min-width: 1800px)',
   };
-  
+
   const BREAKPOINTS = [
     {
       media: MEDIA_QUERIES.SM,
@@ -24,6 +24,5 @@ export const MEDIA_QUERIES = {
       name: 'xl',
     },
   ];
-  
+
   export default BREAKPOINTS;
-  

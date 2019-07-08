@@ -25,22 +25,27 @@
     "react-snap": "^1.23.0"
   },
   "dependencies": {
+    "@contentful/rich-text-html-renderer": "^13.1.0",
     "browserlist": "^1.0.1",
     "classnames": "^2.2.6",
     "contentful": "^7.8.1",
     "lodash": "^4.17.11",
     "node-sass": "^4.12.0",
+    "parcel-plugin-react-svg": "^0.1.0",
     "react": "^16.8.6",
     "react-burger-menu": "^2.6.10",
     "react-dom": "^16.8.6",
+    "react-hamburger-button": "0.0.1",
     "react-hot-loader": "^4.12.0",
     "react-id-swiper": "^2.3.1",
+    "react-ratio": "^0.1.5",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "react-window-decorators": "^1.0.6",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.5",
     "redux-spark": "0.0.5",
-    "smoothscroll-polyfill": "^0.4.4"
+    "smoothscroll-polyfill": "^0.4.4",
+    "swiper": "^4.5.0"
   }
 }

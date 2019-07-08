@@ -1,0 +1,49 @@
+@import "../../../scss/base";
+
+.Footer-logoContainer {
+  width: 180px;
+
+  @include md {
+    width: 100px;
+  }
+}
+
+.Footer-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include md {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}
+
+.Footer-item {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 10px 5px;
+
+  @include md {
+    margin: 0 5px;
+  }
+}
+
+.Footer-wrapper {
+  background: $grey;
+  @include footer-text;
+  padding: 30px 0;
+
+  @include md {
+    padding: 20px 0;
+  }
+}
+
+
+.Footer-title {
+  @include footer-title;
+}

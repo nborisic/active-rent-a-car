@@ -1,0 +1,19 @@
+@import "../../../scss/base";
+
+.BookButton-wrapper {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.BookButton-container {
+  align-self: center;
+}
+
+.BookButton {
+  border: thin solid $black;
+  border-radius: 5px;
+  background: $grey;
+  display: flex;
+  justify-items: center;
+}

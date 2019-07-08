@@ -1,20 +1,22 @@
 $font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // ------ Colors
-$time: 500ms;
+$time: 250ms;
 
 // ------ Colors
 $black: #000;
 $white: #fff;
-$turquoise: #87DBE1;
+$grey: #ebe8e1;
+$blue: #4550ed;
+
 
 // ------ Breakpoints
-$breakpoint-lg: 1200px;
+$breakpoint-lg: 1100px;
 $breakpoint-md: 600px;
 
 // Grid
 $grid-col-count-sm: 4;
-$grid-col-count-md: 9;
+$grid-col-count-md: 12;
 $grid-col-count-lg: 12;
 
 $col-gutter: 2rem;
