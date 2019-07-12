@@ -12,8 +12,9 @@ class Cars extends Component {
       data,
     } = this.props;
 
+    console.log(data);
 
-    return data.map((car, index) => {
+    return data.cars.map((car, index) => {
       const isWideImage = index === 4 || index === 5;
 
       return (
@@ -36,7 +37,7 @@ class Cars extends Component {
 
   render() {
     return(
-      <Container>
+      <Container id={ this.props.data.id }>
         <Grid>
           { this.renderCars() }
         </Grid>

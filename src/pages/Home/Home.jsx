@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 const contentful = require('contentful');
+import omit from 'lodash/omit';
 import get from 'lodash/get';
 import { withWindow } from 'react-window-decorators';
 import { spaceId, accessToken, locales } from '../../constants/contentful';
@@ -15,6 +16,7 @@ import Footer from '../../components/Global/Footer/Footer';
 import Form from '../../components/Global/Form/Form';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import Container from '../../components/Global/Container/Container';
+import Conditions from '../Conditions/Conditions';
 
 import './Home.scss';
 
@@ -67,10 +69,55 @@ class Home extends Component {
     .catch(console.error)
   }
 
+  returnSubPages = (params, homeData, locale) => {
+    console.log('sub',locale);
+
+    const subPagesMap = {
+      home: () => this.renderHomePage(homeData, locale),
+      conditions: () => this.renderConditions(locale),
+      uslovi: () => this.renderConditions(locale),
+    }
+
+    let key = params.page ? params.page : 'home';
+
+    return subPagesMap[key]();
+
+  }
+
+  renderConditions = (locale) => {
+    const {
+      params,
+    } = this.props;
+
+    return <Conditions params={ params } locale={locale}/>
+  }
+
+  renderHomePage = (homeData, locale) => {
+    console.log('home inside', locale);
+
+
+    const body = documentToHtmlString(get(homeData[locale], 'aboutUs.aboutUs') || '');
+    console.log(body);
+
+    const id = get(homeData[locale], 'aboutUs.id')
+
+    return (
+      <Fragment>
+        <Carousel images={ homeData[locale].carouselImages }/>
+        <Container className='Home-mainText' id={ id }>
+          <div dangerouslySetInnerHTML={ { __html: body } }></div>
+        </Container>
+        <Discount data={ homeData[locale].discount } />
+        <Cars data={ homeData[locale].cars } />
+      </Fragment>
+    );
+  }
+
   render() {
     const {
       homeData,
       breakpoint,
+      match,
       match: {
         params: {
           language,
@@ -79,7 +126,10 @@ class Home extends Component {
     } = this.props;
 
     const locale = locales[language] ? locales[language] : 'sr-Latn';
-    const body = documentToHtmlString(homeData[locale].aboutUs || '');
+    const defLanguage = language ? language : 'sr';
+    if(!homeData[locale].aboutUs) {
+      return null;
+    }
 
     return (
       <Fragment>
@@ -87,14 +137,10 @@ class Home extends Component {
         <NavBar
           data={ homeData[locale].navBar }
           breakpoint={ breakpoint }
+          language={ defLanguage }
         />
-        <Carousel images={ homeData[locale].carouselImages }/>
-        <Container className='Home-mainText'>
-          <div dangerouslySetInnerHTML={ { __html: body } }></div>
-        </Container>
-        <Discount data={ homeData[locale].discount } />
-        <Cars data={ homeData[locale].cars } />
-        <Form data={ homeData[locale].form } locale={ locale } />
+        { this.returnSubPages(match.params, homeData, locale) }
+        <Form data={ homeData[locale].form } locale={ locale } language={ defLanguage }/>
         <Footer data={ homeData[locale].footer } logo={ get(homeData[locale].header, 'logo.fields.file.url') }/>
       </Fragment>
     );

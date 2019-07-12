@@ -1,5 +1,6 @@
 import isEmpty from 'validator/lib/isEmpty';
 import isEmail from 'validator/lib/isEmail';
+import animateScrollTo from 'animated-scroll-to';
 
 export function slugify(str) {
   str = str.replace(/^\s+|\s+$/g, ''); // trim
@@ -29,4 +30,23 @@ export function hasStringValue(value) {
 
 export function hasEmailValue(value) {
   return Boolean(value) && isEmail(value.trim());
+}
+
+export function getElementOffsetTop(el) {
+  let top = 0;
+  let element = el;
+
+  do {
+    top += element.offsetTop || 0;
+    element = element.offsetParent;
+  } while (element);
+
+  return top;
+}
+
+export function scrollToElement(id) {
+  const element = document.getElementById(id);
+  const conversionOffset = getElementOffsetTop(element) - 120;
+
+  animateScrollTo(conversionOffset);
 }

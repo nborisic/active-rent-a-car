@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^13.1.0",
+    "animated-scroll-to": "^1.2.2",
     "browserlist": "^1.0.1",
     "classnames": "^2.2.6",
     "contentful": "^7.8.1",

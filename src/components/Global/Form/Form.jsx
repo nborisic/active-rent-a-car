@@ -8,7 +8,6 @@ import { Form, Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays'
 import arrayMutators from 'final-form-arrays'
 import DatePicker from 'react-datepicker';
-import Whatsapp from '../../../assets/whatsapp.svg';
 import Calendar from '../../../assets/calendar.svg';
 import Time from '../../../assets/time.svg';
 import * as emailjs from 'emailjs-com';
@@ -17,6 +16,7 @@ import { hasStringValue, hasEmailValue } from '../../../utils/helpers';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import './Form.scss';
+import { getRoute, routeCodes } from '../../../constants/routes';
 
 const labels = {
   ['en-US']: {
@@ -247,7 +247,10 @@ class Reservation extends Component {
         additions,
       },
       locale,
+      language,
     } = this.props;
+
+    const conditionsLink = language === 'sr' ? 'uslovi' : 'conditions';
 
     const dropdowns = [
       {
@@ -370,7 +373,7 @@ class Reservation extends Component {
                                     htmlFor='conditions'
                                     className='Form-conditions'
                                   >
-                                  { labels[locale].conditions }<Link>{ labels[locale].rentalConditions }</Link>
+                                  { labels[locale].conditions }<Link to={ getRoute(routeCodes.HOME, { language, page: conditionsLink }) }>{ labels[locale].rentalConditions }</Link>
                                   </label>
                                 </Fragment>
                               )}
@@ -427,12 +430,8 @@ class Reservation extends Component {
   }
 
   render() {
-    if (!this.props.data) {
-      return null;
-    }
-
     return(
-      <Container>
+      <Container id={ this.props.data.id }>
         { this.renderForm() }
       </Container>
     )

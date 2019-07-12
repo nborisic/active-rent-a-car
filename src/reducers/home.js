@@ -48,7 +48,7 @@ const get = getHomeDataReducer.addAction('saveData', (state, action) => {
     action.data.forEach(item => {
         Object.keys(sectionMap).forEach(key => {
             if (item.fields[key]) {
-                if (key === 'address' || key === 'logo' || key === 'additions') {
+                if (key === 'address' || key === 'logo' || key === 'additions' || key==='form' || key==='aboutUs' || key==='cars') {
                     data[sectionMap[key]] = item.fields;
                 } else {
                     data[sectionMap[key]] = item.fields[key];

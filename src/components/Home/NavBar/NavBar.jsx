@@ -1,9 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import './NavBar.scss';
+import { Link } from 'react-router-dom';
 import Container from '../../Global/Container/Container';
 import slugify from '../../../utils/helpers';
 import { slide as Menu } from 'react-burger-menu';
 import { HamburgerButton } from 'react-hamburger-button';
+import { scrollToElement } from '../../../utils/helpers';
+import { getRoute, routeCodes } from '../../../constants/routes';
 
 
 class NavBar extends Component {
@@ -14,17 +17,30 @@ class NavBar extends Component {
   renderNavBars = () => {
     const {
       data,
+      language,
     } = this.props;
 
     return data.map((item) => {
-      return (
-        <div
-          key={ item.label }
-          className='NavBar-item'
-        >
-          { item.label }
-        </div>
-      );
+      if (item.params) {
+        return (
+          <Link
+            key={ item.label }
+            to={ getRoute(routeCodes.HOME, { language, ...item.params }) }
+          >
+            { item.label }
+          </Link>
+        );
+      } else {
+        return (
+          <div
+            onClick={() => scrollToElement(item.id) }
+            key={ item.label }
+            className='NavBar-item'
+          >
+            { item.label }
+          </div>
+        );
+      }
     })
   }
 

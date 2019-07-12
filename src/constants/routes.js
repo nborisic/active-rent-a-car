@@ -1,5 +1,7 @@
 export const routeCodes = {
-  HOME: '/:language?',
+  HOME: '/:language?/:page?',
+  conditions: '/:language/:conditions?',
+  price: '/:language/:price?',
 };
 
 export function getRoute(route, params) {
