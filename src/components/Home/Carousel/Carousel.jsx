@@ -14,9 +14,6 @@ class Carousel extends Component {
     } = this.props;
 
     return images.map(image => {
-      console.log( image.fields.file.url );
-
-
       return (
         <div
           key={ image.fields.file.url }

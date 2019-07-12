@@ -1,0 +1,103 @@
+@import "../../../scss/base";
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  margin: 80px 0;
+}
+
+.Form-title {
+  display: inline-block;
+  margin: 20px auto;
+}
+
+.Form-selectWrapper {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    @include body;
+    color: $black;
+  }
+
+  select {
+    color: rgba($black, 0.5);
+    @include body;
+  }
+
+  select.Form-select--hasValue {
+    color: $black;
+  }
+}
+
+.Form-inputContainer {
+  margin-bottom: 10px;
+
+  label {
+    @include body;
+  }
+
+  .Col {
+    display: flex;
+    min-height: 28px;
+  }
+}
+
+.Form-select {
+  width: 100%;
+}
+
+.Form-input {
+  border: thin solid $black;
+  border-radius: 5px;
+  width: 100%;
+  min-height: 28px;
+  padding-left: 10px;
+  @include body;
+}
+
+.Form-input--hasError {
+  border-color: red;
+}
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container {
+  width: 100%;
+}
+
+.Form-dates {
+  .Col {
+    margin-bottom: 10px;
+    position: relative;
+
+    svg {
+      position: absolute;
+      right: 20px;
+      top: 2px;
+    }
+  }
+}
+
+.Form-conditions {
+  @include body;
+}
+
+.Form-contact {
+  .Col {
+    margin-bottom: 10px;
+  }
+
+  textarea {
+    resize: none;
+    min-height: 200px;
+    padding-top: 7px;
+  }
+}
+
+
+.Form-submit {
+  padding: 10px;
+  background: $grey;
+  border: $black;
+  border-radius: 5px;
+}

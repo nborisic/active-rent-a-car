@@ -19,19 +19,23 @@ class Header extends Component {
     const contactsMap = [
       {
         icon: Telephone,
-        href: `mailto:${ mail }`,
+        href: `tel:${ telephone }`,
+        target: '_self'
       },
       {
         icon: Mail,
-        href: `tel:${ telephone }`,
+        href: `mailto:${ mail }`,
+        target: '_self'
       },
       {
         icon: Viber,
-        href: `viber://add?number=${ telephone }`,
+        href: `viber://chat?number=%2B${ telephone }`,
+        target: '_blank'
       },
       {
         icon: Whatsapp,
         href: `https://api.whatsapp.com/send?phone=${ telephone }`,
+        target: '_blank'
       }
     ];
 
@@ -43,17 +47,12 @@ class Header extends Component {
           href={ contact.href }
           key={ contact.href }
           rel='noopener noreferrer'
-          target='_blank'
+          target={ contact.target }
         >
           <Icon />
         </a>
       )
     })
-  }
-
-  handleLanguageChange = (event) => {
-    console.log(event);
-
   }
 
   renderFlags = () => {
@@ -83,7 +82,7 @@ class Header extends Component {
         <a
           href={ `tel:${ telephone }` }
           rel='noopener noreferrer'
-          target='_blank'
+          target='_self'
         >
           <Telephone />
         </a>
@@ -111,7 +110,7 @@ class Header extends Component {
               ratio={ 744/265 }
             >
             <div
-              className="Header-logo"
+              className='Header-logo'
               style={ { backgroundImage: `url(${ data.logo.fields.file.url })` } }
             />
             </Ratio>
@@ -119,7 +118,7 @@ class Header extends Component {
           <div className='Header-mail'>
             <a
               href={ `mailto:${ data.mail }`}
-              target="_self"
+              target='_self'
             >{ data.mail }</a>
           </div>
           <div className='Header-contactContainer'>

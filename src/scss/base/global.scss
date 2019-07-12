@@ -1,18 +1,17 @@
 body {
-    overflow-x: hidden;
-    margin: 0;
-    position: relative;
-    padding: 0;
-    height: 100%;
-  }
-  
-  select,
-  input,
-  button {
-    padding: 0;
-    outline: none;
-    border: none;
-    font-family: $font-family-sans-serif;
-    background: none;
-  }
-  
+  overflow-x: hidden;
+  margin: 0;
+  position: relative;
+  padding: 0;
+  height: 100%;
+}
+
+select,
+input,
+button {
+  padding: 0;
+  outline: none;
+  border: none;
+  font-family: $font-family-sans-serif;
+  background: none;
+}

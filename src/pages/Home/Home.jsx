@@ -12,8 +12,11 @@ import Cars from '../../components/Home/Cars/Cars';
 import Discount from '../../components/Home/Discount/Discount';
 import Carousel from '../../components/Home/Carousel/Carousel';
 import Footer from '../../components/Global/Footer/Footer';
+import Form from '../../components/Global/Form/Form';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import Container from '../../components/Global/Container/Container';
+
+import './Home.scss';
 
 class Home extends Component {
   constructor(props) {
@@ -37,14 +40,14 @@ class Home extends Component {
 
     const locale = language ? locales[language] : locales.sr;
 
-    if(prevProps.match.params.language !== language && !this.props.homeData[locale].aboutUs) {
+    if (prevProps.match.params.language !== language && !this.props.homeData[locale].aboutUs) {
       this.getContentfulData(locale)
     }
 
   }
 
   getContentfulData = (locale) => {
-    const entriesToGet = ['aboutUs', 'carousel', 'discountActions', 'carsInStoc', 'footer', 'navBar', 'header'].join(',', ',');
+    const entriesToGet = ['aboutUs', 'carousel', 'discountActions', 'carsInStoc', 'footer', 'navBar', 'header', 'form'].join(',', ',');
 
     const client = contentful.createClient({
       space: spaceId,
@@ -76,7 +79,6 @@ class Home extends Component {
     } = this.props;
 
     const locale = locales[language] ? locales[language] : 'sr-Latn';
-
     const body = documentToHtmlString(homeData[locale].aboutUs || '');
 
     return (
@@ -87,11 +89,12 @@ class Home extends Component {
           breakpoint={ breakpoint }
         />
         <Carousel images={ homeData[locale].carouselImages }/>
-        <Container>
+        <Container className='Home-mainText'>
           <div dangerouslySetInnerHTML={ { __html: body } }></div>
         </Container>
         <Discount data={ homeData[locale].discount } />
         <Cars data={ homeData[locale].cars } />
+        <Form data={ homeData[locale].form } locale={ locale } />
         <Footer data={ homeData[locale].footer } logo={ get(homeData[locale].header, 'logo.fields.file.url') }/>
       </Fragment>
     );

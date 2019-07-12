@@ -1,3 +1,6 @@
+import isEmpty from 'validator/lib/isEmpty';
+import isEmail from 'validator/lib/isEmail';
+
 export function slugify(str) {
   str = str.replace(/^\s+|\s+$/g, ''); // trim
   str = str.toLowerCase();
@@ -18,4 +21,12 @@ export function slugify(str) {
     .replace(/-+$/, ''); // trim - from end of text
 
   return str;
+}
+
+export function hasStringValue(value) {
+  return Boolean(value) && !isEmpty(value.trim());
+}
+
+export function hasEmailValue(value) {
+  return Boolean(value) && isEmail(value.trim());
 }
