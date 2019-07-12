@@ -74,6 +74,7 @@ class Home extends Component {
 
     const subPagesMap = {
       home: () => this.renderHomePage(homeData, locale),
+      pocetna: () => this.renderHomePage(homeData, locale),
       conditions: () => this.renderConditions(locale),
       uslovi: () => this.renderConditions(locale),
     }
