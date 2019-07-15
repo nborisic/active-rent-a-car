@@ -12,12 +12,14 @@
 }
 
 .Header {
+  position: relative;
   height: 70px;
   display: flex;
-  justify-content: space-between;
+
   align-items: center;
 
   @include md {
+    justify-content: space-between;
     height: 100px;
   }
 
@@ -27,9 +29,11 @@
 }
 
 .Header-logoContainer {
+
   @include flex-basis(50%);
 
   @include md {
+    margin-left: -100px;
     @include flex-basis(40%)
   }
 }
@@ -105,13 +109,17 @@
 }
 
 .Header-contactContainer {
-  height: 100%;
+
   @include flex-basis(40%);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
   @include md {
+    position: absolute;
+    top: 0;
+    right: -80px;
+    height: 100%;
     @include flex-basis(auto)
   }
 

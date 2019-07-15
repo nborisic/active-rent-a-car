@@ -1,9 +1,10 @@
 @import "../../../scss/base";
 
 .NavBar-container {
+
   border-top: thin solid $black;
   border-bottom: thin solid $black;
-  background: $grey;
+  background: rgb(252, 102, 3);
   display: flex;
   position: sticky;
   top: 0;
@@ -25,21 +26,36 @@
 .NavBar {
   display: flex;
   justify-content: space-between;
-  align-items: center
+  align-items: center;
+  transform: color $time;
+
+  a {
+    color: $white;
+    text-decoration: none;
+
+    @include on-enter {
+      color: $blue;
+    }
+  }
 }
 
 .NavBar-item {
-  color: $grey;
-  transition: opacity $time;
+  color: $white;
+  transition: opacity $time, color $time;
 
 
   @include md {
-    color: $blue;
+    color: $white;
     line-height: 60px;
   }
 
   @include on-enter {
     opacity: 0.8;
+  }
+
+
+  @include on-enter {
+    color: $blue;
   }
 }
 

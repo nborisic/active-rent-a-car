@@ -33,7 +33,7 @@ class Carousel extends Component {
         clickable: true
       },
       loop: true,
-      autoplay: true,
+      // autoplay: true,
       delay: 6000,
     }
 
