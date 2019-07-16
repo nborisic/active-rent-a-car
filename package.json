@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html --out-dir build",
+    "build": "./build.sh",
     "postbuild": "react-snap"
   },
   "browserslist": [
@@ -32,6 +32,7 @@
     "classnames": "^2.2.6",
     "contentful": "^7.8.1",
     "date-fns": "^1.30.1",
+    "dotenv": "^8.0.0",
     "emailjs-com": "^2.3.2",
     "final-form": "^4.16.1",
     "final-form-arrays": "^1.1.2",
