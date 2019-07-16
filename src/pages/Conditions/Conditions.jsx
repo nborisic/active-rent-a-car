@@ -20,8 +20,6 @@ class Conditions extends Component {
 
 
     scrollTo(0,0);
-    console.log('MOUNTOVALA S');
-
 
       this.getContentfulData(locale)
 

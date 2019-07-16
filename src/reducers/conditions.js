@@ -12,8 +12,6 @@ export const getConditionsReducer = new Reducer('conditions', {
 });
 
 const get = getConditionsReducer.addAction('saveConditionsData', (state, action) => {
-  console.log(action.data);
-
     const data = {
       conditions: action.data[0].fields.terms,
     };

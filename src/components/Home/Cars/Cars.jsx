@@ -12,8 +12,6 @@ class Cars extends Component {
       data,
     } = this.props;
 
-    console.log(data);
-
     return data.cars.map((car, index) => {
       const isWideImage = index === 4 || index === 5;
 

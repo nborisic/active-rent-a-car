@@ -1,6 +1,6 @@
-import { createStore, compose } from 'redux';
-
-// import rootSaga from '../sagas';
+import { applyMiddleware, createStore, compose } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from '../sagas';
 import rootReducer from '../reducers';
 
 
@@ -14,14 +14,30 @@ export default () => {
   // Creating store
   let store = null;
   let middleware = null;
-
+  const sagaMiddleware = createSagaMiddleware();
+  middleware = applyMiddleware(sagaMiddleware);
 
     // Enable DevTools if browser extension is installed
-    if (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__) {
-      middleware = compose(
-        window.__REDUX_DEVTOOLS_EXTENSION__()
-      );
-    }
+    // if (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__) {
+    //   middleware = compose(
+    //     window.__REDUX_DEVTOOLS_EXTENSION__()
+    //   );
+    // }
+
+
+
+
+  // Tell react-snap how to save Redux state
+  window.snapSaveState = () => {
+    console.log('uzet store',store.getState(),);
+
+    return ({
+      __PRELOADED_STATE__: store.getState(),
+    });
+  };
+
+  console.log('preloded',window.__PRELOADED_STATE__);
+  console.log('saved',snapSaveState);
 
 
   store = createStore(
@@ -30,15 +46,10 @@ export default () => {
     middleware
   );
 
-  // Tell react-snap how to save Redux state
-  window.snapSaveState = () => {
-    return ({
-      __PRELOADED_STATE__: store.getState(),
-    });
-  };
+
 
   // Run sagas
-//   sagaMiddleware.run(rootSaga);
+  sagaMiddleware.run(rootSaga);
 
   return {
     store,

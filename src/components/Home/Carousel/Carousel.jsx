@@ -37,6 +37,7 @@ class Carousel extends Component {
       delay: 6000,
     }
 
+    console.log(process);
     return(
       <Ratio
         ratio={ 16/9 }

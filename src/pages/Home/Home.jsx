@@ -25,8 +25,9 @@ class Home extends Component {
     super(props);
 
     const locale = props.match.params.language ? locales[props.match.params.language] : locales.sr;
+    // console.log(props.homeData[locale]);
 
-    if(!props.homeData[locale].aboutUs) {
+    if(props.homeData && props.homeData[locale] && !props.homeData[locale].aboutUs) {
       this.getContentfulData(locale)
     }
   }
@@ -62,16 +63,12 @@ class Home extends Component {
       locale,
     })
     .then((response) => {
-      console.log('responce', response);
-
       this.props.dispatch(getData(response.items, locale))
     })
     .catch(console.error)
   }
 
   returnSubPages = (params, homeData, locale) => {
-    console.log('sub',locale);
-
     const subPagesMap = {
       home: () => this.renderHomePage(homeData, locale),
       pocetna: () => this.renderHomePage(homeData, locale),
@@ -94,11 +91,8 @@ class Home extends Component {
   }
 
   renderHomePage = (homeData, locale) => {
-    console.log('home inside', locale);
-
 
     const body = documentToHtmlString(get(homeData[locale], 'aboutUs.aboutUs') || '');
-    console.log(body);
 
     const id = get(homeData[locale], 'aboutUs.id')
 
@@ -115,6 +109,9 @@ class Home extends Component {
   }
 
   render() {
+    console.log('PROCESSS', process);
+
+
     const {
       homeData,
       breakpoint,
