@@ -103,23 +103,17 @@ class Header extends Component {
     const telephone = data.contact.replace(/\+/g, '');
 
     return (
-      <div className='Header-wrapper'>
+      <div className='Header-wrapper' id='home'>
         <Container className='Header'>
         <div className='Header-logoContainer'>
             <Ratio
-              ratio={ 744/265 }
+              ratio={ 1487/379 }
             >
             <div
               className='Header-logo'
               style={ { backgroundImage: `url(${ data.logo.fields.file.url })` } }
             />
             </Ratio>
-          </div>
-          <div className='Header-mail'>
-            <a
-              href={ `mailto:${ data.mail }`}
-              target='_self'
-            >{ data.mail }</a>
           </div>
           <div className='Header-contactContainer'>
             <div className='Header-flagContainer'>{ this.renderFlags() }</div>

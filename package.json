@@ -4,8 +4,7 @@
   "description": "",
   "scripts": {
     "start": "parcel index.html",
-    "build": "./build.sh",
-    "postbuild": "react-snap"
+    "build": "./build.sh"
   },
   "browserslist": [
     "last 1 Chrome version"

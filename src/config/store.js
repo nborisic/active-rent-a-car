@@ -17,16 +17,6 @@ export default () => {
   const sagaMiddleware = createSagaMiddleware();
   middleware = applyMiddleware(sagaMiddleware);
 
-    // Enable DevTools if browser extension is installed
-    // if (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__) {
-    //   middleware = compose(
-    //     window.__REDUX_DEVTOOLS_EXTENSION__()
-    //   );
-    // }
-
-
-
-
   // Tell react-snap how to save Redux state
   window.snapSaveState = () => {
     console.log('uzet store',store.getState(),);
@@ -36,17 +26,11 @@ export default () => {
     });
   };
 
-  console.log('preloded',window.__PRELOADED_STATE__);
-  console.log('saved',snapSaveState);
-
-
   store = createStore(
     rootReducer,
     preloadedState || {},
     middleware
   );
-
-
 
   // Run sagas
   sagaMiddleware.run(rootSaga);

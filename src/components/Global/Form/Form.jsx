@@ -23,9 +23,9 @@ const labels = {
     title: 'Reservation',
     carsPlaceholder: 'Select a vehicle',
     pickUpLocationLabel: 'Pick up location',
-    pickUpLocationPlaceholder: 'Select pick up location...',
+    pickUpLocationPlaceholder: 'Pick up location',
     dropOffLocationLabel: 'Drop off location',
-    dropOffLocationPlaceholder: 'Select drop off location...',
+    dropOffLocationPlaceholder: 'Drop off location',
     pickUpDatePlaceholder: `Pick up date`,
     dropOffDatePlaceholder: 'Drop off date',
     pickUpTimePlaceholder: 'Pick up time',
@@ -35,21 +35,22 @@ const labels = {
     telephonePlaceholder: 'Tel.(+381 65 111 222)*',
     emailPlaceholder: 'E-mail*',
     birthdayPlaceholder: 'Birthday*',
-    flightNumberPlaceholder: 'Flight number or Airline arrival',
+    flightNumberPlaceholder: 'Flight number',
     commentPlaceholder: 'Leave your comment...',
     conditions: 'I agree to ',
     timeCaption: 'Time',
     dateFormat: 'MM/dd/yyyy',
     rentalConditions: 'rental conditions',
     submitButton: 'Submit',
+    accessories: 'Accessories',
   },
   ['sr-Latn']: {
     title: 'Rezervacija',
     carsPlaceholder: 'Izaberi vozilo',
     pickUpLocationLabel: 'Mesto preuzimanja vozila',
     dropOffLocationLabel: 'Mesto vraćanja vozila',
-    pickUpLocationPlaceholder: 'Izaberi Mesto preuzimanja vozila...',
-    dropOffLocationPlaceholder: 'Izaberi mesto vraćanja vozila...',
+    pickUpLocationPlaceholder: 'Mesto preuzimanja vozila',
+    dropOffLocationPlaceholder: 'Mesto vraćanja vozila',
     pickUpDatePlaceholder: 'Datum preuzimanja',
     dropOffDatePlaceholder: 'Datum vraćanja',
     pickUpTimePlaceholder: 'Vreme preuzimanja',
@@ -59,13 +60,14 @@ const labels = {
     telephonePlaceholder: 'Tel.(+381 65 111 222)*',
     emailPlaceholder: 'E-mail*',
     birthdayPlaceholder: 'Datm rodjenja*',
-    flightNumberPlaceholder: 'Broj leta ili Airline dolaska',
+    flightNumberPlaceholder: 'Broj leta',
     commentPlaceholder: 'Napišite Vaš komentar...',
     conditions: 'Slažem se sa ',
     timeCaption: 'Vreme',
     dateFormat: 'dd/MM/yyyy',
     rentalConditions: 'uslovima najma',
-    submitButton: 'Pošalji'
+    submitButton: 'Pošalji',
+    accessories: 'Dodaci',
   }
 }
 
@@ -100,13 +102,16 @@ class Reservation extends Component {
     );
   };
 
-  renderAdditions = (additions) => {
+  renderAdditions = (additions, locale) => {
     return (
-      <FieldArray
-        name='additions'
-        component={ this.CheckboxGroup }
-        options={ additions }
-      />
+      <Fragment>
+        <span className='Form-accessories' >{ labels[locale].accessories }</span>
+        <FieldArray
+          name='additions'
+          component={ this.CheckboxGroup }
+          options={ additions }
+        />
+      </Fragment>
     )
   }
 
@@ -140,7 +145,7 @@ class Reservation extends Component {
                       <label htmlFor={ dropdown.name }>{ labels[locale][`${ dropdown.name }Label`] }</label>
                     </Col>
                   }
-                  {labels[locale][`${ dropdown.name }Label`] ? <Col md={ 6 }>{selectElement}</Col> : <Col>{ selectElement }</Col>}
+                  {labels[locale][`${ dropdown.name }Label`] ? <Col md={ 6 }>{ selectElement }</Col> : <Col>{ selectElement }</Col>}
                 </Grid>
               </div>
             )
@@ -347,7 +352,7 @@ class Reservation extends Component {
                       <Grid className='Form-dates'>
                         { this.renderDatePickers(datePickers) }
                       </Grid>
-                      { this.renderAdditions(additions) }
+                      { this.renderAdditions(additions, locale) }
                     </Col>
                     <Col md={6}>
                       <Grid className='Form-contact'>
@@ -373,7 +378,10 @@ class Reservation extends Component {
                                     htmlFor='conditions'
                                     className='Form-conditions'
                                   >
-                                  { labels[locale].conditions }<Link to={ getRoute(routeCodes.HOME, { language, page: conditionsLink }) }>{ labels[locale].rentalConditions }</Link>
+                                  { labels[locale].conditions }<Link
+                                  to={ getRoute(routeCodes.HOME, { language, page: conditionsLink }) }
+                                  className='Form-conditionsLink'
+                                  >{ labels[locale].rentalConditions }*</Link>
                                   </label>
                                 </Fragment>
                               )}
@@ -385,7 +393,7 @@ class Reservation extends Component {
                   </Grid>
               <button
                 type='submit'
-                className='Form-submit'
+                className='BookButton'
                 disabled={ !form.getState().valid || submitting }
               >
                 { labels[locale].submitButton }

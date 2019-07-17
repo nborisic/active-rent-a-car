@@ -17,6 +17,7 @@ import Form from '../../components/Global/Form/Form';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import Container from '../../components/Global/Container/Container';
 import Conditions from '../Conditions/Conditions';
+import { scrollToElement } from '../../utils/helpers';
 
 import './Home.scss';
 
@@ -25,7 +26,6 @@ class Home extends Component {
     super(props);
 
     const locale = props.match.params.language ? locales[props.match.params.language] : locales.sr;
-    // console.log(props.homeData[locale]);
 
     if(props.homeData && props.homeData[locale] && !props.homeData[locale].aboutUs) {
       this.getContentfulData(locale)
@@ -40,6 +40,13 @@ class Home extends Component {
         }
       }
     } = this.props;
+
+    // scroll to element when not on home page
+    if(this.props.location.state) {
+      setTimeout(() => {
+        scrollToElement(this.props.location.state.scrollToId);
+      }, 0);
+    }
 
     const locale = language ? locales[language] : locales.sr;
 
@@ -102,16 +109,13 @@ class Home extends Component {
         <Container className='Home-mainText' id={ id }>
           <div dangerouslySetInnerHTML={ { __html: body } }></div>
         </Container>
-        <Discount data={ homeData[locale].discount } />
+        <Discount data={ homeData[locale].discount } locale={ locale }/>
         <Cars data={ homeData[locale].cars } />
       </Fragment>
     );
   }
 
   render() {
-    console.log('PROCESSS', process);
-
-
     const {
       homeData,
       breakpoint,
@@ -122,6 +126,8 @@ class Home extends Component {
         }
       }
     } = this.props;
+
+    console.log('PROCESSS', homeData);
 
     const locale = locales[language] ? locales[language] : 'sr-Latn';
     const defLanguage = language ? language : 'sr';
@@ -136,10 +142,15 @@ class Home extends Component {
           data={ homeData[locale].navBar }
           breakpoint={ breakpoint }
           language={ defLanguage }
+          match={ match }
         />
         { this.returnSubPages(match.params, homeData, locale) }
         <Form data={ homeData[locale].form } locale={ locale } language={ defLanguage }/>
-        <Footer data={ homeData[locale].footer } logo={ get(homeData[locale].header, 'logo.fields.file.url') }/>
+        <Footer
+          data={ homeData[locale].footer }
+          logo={ get(homeData[locale].header, 'logo.fields.file.url') }
+          locale={ locale }
+        />
       </Fragment>
     );
   }

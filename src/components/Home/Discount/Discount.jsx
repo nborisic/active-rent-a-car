@@ -10,6 +10,7 @@ class Discount extends Component {
   render() {
     const {
       data,
+      locale,
     } = this.props;
 
     return(
@@ -21,13 +22,14 @@ class Discount extends Component {
               md={ 8 }
               className='Discount'
             >
-              <h2>{data}</h2>
+              <h2>{ data }</h2>
             </Col>
             <Col
               sm={ 1 }
               md={ 4 }
+              className='Discount-button'
             >
-              <BookButton />
+              <BookButton locale={ locale }/>
             </Col>
           </Grid>
         </Container>

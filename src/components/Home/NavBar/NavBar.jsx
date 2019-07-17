@@ -7,7 +7,7 @@ import { slide as Menu } from 'react-burger-menu';
 import { HamburgerButton } from 'react-hamburger-button';
 import { scrollToElement } from '../../../utils/helpers';
 import { getRoute, routeCodes } from '../../../constants/routes';
-
+import withRedirect from '../../../decorators/redirect';
 
 class NavBar extends Component {
   state = {
@@ -18,12 +18,25 @@ class NavBar extends Component {
     const {
       data,
       language,
+      redirectTo,
+      match,
     } = this.props;
+    console.log(data);
+
+    const homeIds = ['aboutUs', 'vehicles'];
+    const needsToRedirectPages = ['conditions', 'uslovi', 'price', 'cena'];
+
+    const isRedirectedPage = needsToRedirectPages.indexOf(match.params.page) !== -1;
+    console.log(isRedirectedPage);
+
 
     return data.map((item) => {
+      const isRedirectLink = homeIds.indexOf(item.id) !== -1;
+
       if (item.params) {
         return (
           <Link
+            onClick={ this.closeBurger }
             key={ item.label }
             to={ getRoute(routeCodes.HOME, { language, ...item.params }) }
           >
@@ -33,7 +46,7 @@ class NavBar extends Component {
       } else {
         return (
           <div
-            onClick={() => scrollToElement(item.id) }
+            onClick={() => (isRedirectedPage && isRedirectLink) ? this.handelRedirect(item.id) : this.handleInnerScroll(item.id) }
             key={ item.label }
             className='NavBar-item'
           >
@@ -42,6 +55,28 @@ class NavBar extends Component {
         );
       }
     })
+  }
+
+  handelRedirect = (itemId) => {
+    const {
+      redirectTo,
+      language,
+    } = this.props;
+
+    redirectTo(getRoute(routeCodes.HOME, { language, page: 'home' }), true, { scrollToId: itemId })
+  }
+
+  forceCloseBurger = () => {
+    this.setState({
+      isBurgerOpen: false,
+    });
+  }
+
+  handleInnerScroll = (itemId) => {
+    this.forceCloseBurger();
+    console.log(itemId);
+
+    scrollToElement(itemId);
   }
 
   closeBurger = (state) => {
@@ -81,9 +116,9 @@ class NavBar extends Component {
               <HamburgerButton
                 open={ isBurgerOpen }
                 onClick={ this.openBurger }
-                width={36}
-                height={30}
-                strokeWidth={5}
+                width={30}
+                height={20}
+                strokeWidth={4}
                 left={20}
                 color='black'
                 animationDuration={0.3}
@@ -99,5 +134,5 @@ class NavBar extends Component {
 }
 
 
-export default NavBar;
+export default withRedirect(NavBar);
 

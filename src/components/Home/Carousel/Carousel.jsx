@@ -7,6 +7,9 @@ import './Carousel.scss';
 import 'react-id-swiper/lib/styles/scss/swiper.scss';
 
 class Carousel extends Component {
+  componentDidMount() {
+    scrollTo(0,0);
+  }
 
   renderImages = () => {
     const {
