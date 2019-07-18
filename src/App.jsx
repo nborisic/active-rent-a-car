@@ -1,9 +1,10 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { WindowManager } from 'react-window-decorators';
+import createHistory from 'history/createBrowserHistory'
 import smoothscroll from 'smoothscroll-polyfill';
 import ReactGA from 'react-ga';
-import { gaId } from './constants/contentful';
+
 
 import configureStore from './config/store';
 
@@ -18,9 +19,12 @@ smoothscroll.polyfill();
 
 const store = configureStore().store;
 
-ReactGA.initialize(
-  gaId, { testMode: true }
-);
+const history = createHistory();
+history.listen((location, action) => {
+  ReactGA.pageview(location.pathname + location.search);
+  console.log(location.pathname)
+});
+
 
 const App = () => {
   return (

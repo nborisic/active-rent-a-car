@@ -18,6 +18,7 @@ import Conditions from '../Conditions/Conditions';
 import PriceList from '../PriceList/PriceList';
 import { scrollToElement } from '../../utils/helpers';
 import ReactGA from 'react-ga';
+import { gaId } from '../../constants/contentful';
 
 
 
@@ -27,7 +28,11 @@ class Home extends Component {
   constructor(props) {
     super(props);
 
-    ReactGA.pageview(props.location.pathname);
+    // ReactGA.initialize(gaId);
+    // props.history.listen((location, action) => {
+    //     ReactGA.pageview(location.pathname + location.search);
+    //     console.log(location.pathname)
+    // });
 
     const locale = props.match.params.language ? locales[props.match.params.language] : locales.sr;
 
@@ -35,6 +40,7 @@ class Home extends Component {
       this.getContentfulData(locale)
     }
   }
+
 
   componentDidUpdate(prevProps) {
     const {
