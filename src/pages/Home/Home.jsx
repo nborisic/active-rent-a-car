@@ -17,12 +17,17 @@ import Container from '../../components/Global/Container/Container';
 import Conditions from '../Conditions/Conditions';
 import PriceList from '../PriceList/PriceList';
 import { scrollToElement } from '../../utils/helpers';
+import ReactGA from 'react-ga';
+
+
 
 import './Home.scss';
 
 class Home extends Component {
   constructor(props) {
     super(props);
+
+    ReactGA.pageview(props.location.pathname);
 
     const locale = props.match.params.language ? locales[props.match.params.language] : locales.sr;
 

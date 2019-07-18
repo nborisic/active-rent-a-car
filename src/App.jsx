@@ -2,6 +2,8 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { WindowManager } from 'react-window-decorators';
 import smoothscroll from 'smoothscroll-polyfill';
+import ReactGA from 'react-ga';
+import { gaId } from './constants/contentful';
 
 import configureStore from './config/store';
 
@@ -15,6 +17,10 @@ new WindowManager(BREAKPOINTS, 50);
 smoothscroll.polyfill();
 
 const store = configureStore().store;
+
+ReactGA.initialize(
+  gaId, { testMode: true }
+);
 
 const App = () => {
   return (

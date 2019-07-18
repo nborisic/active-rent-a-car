@@ -72,10 +72,6 @@ const labels = {
 }
 
 class Reservation extends Component {
-  onSubmit = (formValues) => {
-    console.log(formValues);
-  }
-
   CheckboxGroup = ({ fields, options }) => {
     const toggle = (event, option) => {
       if (event.target.checked) {
@@ -406,13 +402,30 @@ class Reservation extends Component {
     )
   }
 
-  handleSubmit = (e, value) => {
+  handleSubmit = (value, e) => {
     console.log(e, value);
+    console.log(value);
 
     var templateParams = {
-      name: 'Nikola',
-      from_name: 'RADI JBGT'
+      additions: value.additions ? value.additions.join(',', ', ') : '/',
+      birthday: value.birthday,
+      cars: value.cars ? value.cars : '/',
+      comment: value.comment ? value.comment : '/',
+      dropOffDate: value.dropOffDate ? new Date(value.dropOffDate).toLocaleDateString('sr-Latn-CS'): '/',
+      dropOffLocation: value.dropOffLocation ? value.dropOffLocation : '/',
+      dropOffTime: value.dropOffTime ? new Date(value.dropOffTime).toLocaleTimeString('sr-Latn-CS'): '/',
+      email: value.email,
+      flightNumber: value.flightNumber ? value.flightNumber : '/',
+      lastName: value.lastName,
+      name: value.name,
+      pickUpDate: value.pickUpDate ? new Date(value.pickUpDate).toLocaleDateString('sr-Latn-CS') : '/',
+      pickUpLocation: value.pickUpLocation ? value.pickUpLocation : '/',
+      pickUpTime: value.pickUpTime?  new Date(value.pickUpTime).toLocaleTimeString('sr-Latn-CS') : '/',
+      telephone: value.telephone ? value.telephone : '/',
   };
+
+  console.log(templateParams);
+
 
   emailjs.send('gmail', 'template_csYppzJ4', templateParams, 'user_UaMduedrdHDA2YXykZVnM')
       .then(function(response) {
@@ -420,14 +433,6 @@ class Reservation extends Component {
       }, function(error) {
          console.log('FAILED...', error);
       });
-
-  // emailjs.send('mailjet', 'template_csYppzJ4', templateParams, 'user_UaMduedrdHDA2YXykZVnM')
-  //     .then(function(response) {
-  //        console.log('SUCCESS!', response.status, response.text);
-  //     }, function(error) {
-  //        console.log('FAILED...', error);
-  //     });
-
   }
 
   renderSelectOptions = (options) => {
