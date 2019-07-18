@@ -335,7 +335,7 @@ class Reservation extends Component {
       <div className='Form'>
         <h2 className='Form-title'>{ labels[locale].title }</h2>
         <Form
-          onSubmit={ this.onSubmit }
+          onSubmit={ this.handleSubmit }
           mutators={ {
             ...arrayMutators
           } }
