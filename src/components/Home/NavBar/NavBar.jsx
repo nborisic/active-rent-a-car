@@ -18,17 +18,13 @@ class NavBar extends Component {
     const {
       data,
       language,
-      redirectTo,
       match,
     } = this.props;
-    console.log(data);
 
     const homeIds = ['aboutUs', 'vehicles'];
     const needsToRedirectPages = ['conditions', 'uslovi', 'price', 'cena'];
 
     const isRedirectedPage = needsToRedirectPages.indexOf(match.params.page) !== -1;
-    console.log(isRedirectedPage);
-
 
     return data.map((item) => {
       const isRedirectLink = homeIds.indexOf(item.id) !== -1;

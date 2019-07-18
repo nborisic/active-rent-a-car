@@ -23,8 +23,6 @@ const withRedirect = ComposedComponent => class RedirectDecorator extends Compon
   }
 
   redirectTo = (redirectUrl, push = false, state = null) => {
-    console.log(redirectUrl, push, state);
-
     this.setState({
       push,
       redirectUrl,
@@ -38,9 +36,6 @@ const withRedirect = ComposedComponent => class RedirectDecorator extends Compon
       redirectUrl,
       state,
     } = this.state;
-
-    console.log('STATE', state);
-
 
     if (redirectUrl) {
       return (

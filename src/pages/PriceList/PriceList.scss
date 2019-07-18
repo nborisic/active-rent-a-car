@@ -1,0 +1,125 @@
+@import "../../scss/base";
+
+.PriceList {
+  margin-top: 60px;
+
+  @include md {
+    margin-top: 80px;
+  }
+
+  @include lg {
+    margin-top: 100px;
+  }
+}
+
+.PriceList-title {
+  margin-bottom: 20px;
+  font-size: 2.0rem;
+    line-height: 3rem;
+
+  @include md {
+    font-size: 2.8rem;
+    line-height: 4rem;
+  }
+
+  @include lg {
+    font-size: 3.5rem;
+    line-height: 4.2rem;
+  }
+
+  span {
+    white-space: nowrap;
+  }
+}
+
+.PriceList-heading {
+  background: $orange;
+  font-weight: 550;
+  color: $white;
+
+  .Grid {
+    align-items: center;
+
+    .Col:first-child {
+      text-align: center;
+    }
+  }
+
+  @include sm-only {
+    .Col {
+      text-align: center;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      border-bottom: thin solid transparent;
+    }
+  }
+
+  @include md {
+    padding: 5px 0;
+  }
+}
+
+.PriceList-listClass {
+  @include md {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-size: 15px;
+
+    .BookButton {
+      font-size: 15px;
+    }
+  }
+
+  @include lg {
+    font-size: 20px;
+    line-height: 25px;
+
+    .BookButton {
+      font-size: 20px;
+      line-height: 25px;
+    }
+  }
+
+  .PriceList-car:last-child {
+    border-color: transparent;
+  }
+}
+
+.PriceList-car {
+  padding: 10px 0;
+  border-bottom: thin solid $orange;
+
+  .Grid {
+    align-items: center;
+
+    .Col:first-child {
+      text-align: center;
+    }
+  }
+}
+
+.PriceList-car--sm {
+  .Col {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: thin solid $orange;
+  }
+
+  .Col:nth-last-child(-n +2) {
+    border-color: transparent;
+  }
+}
+
+.PriceList-bookButton {
+  button {
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+  }
+
+  @include sm-only {
+    margin-top: 15px;
+    margin-bottom: 50px;
+  }
+}

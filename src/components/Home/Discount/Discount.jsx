@@ -18,14 +18,14 @@ class Discount extends Component {
         <Container className='Discount-container'>
           <Grid>
             <Col
-              sm={ 3 }
+              sm={ 2 }
               md={ 8 }
               className='Discount'
             >
               <h2>{ data }</h2>
             </Col>
             <Col
-              sm={ 1 }
+              sm={ 2 }
               md={ 4 }
               className='Discount-button'
             >

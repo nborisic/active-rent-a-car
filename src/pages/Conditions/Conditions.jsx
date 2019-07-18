@@ -53,7 +53,7 @@ class Conditions extends Component {
     const body = documentToHtmlString(get(conditionsData[locale], 'conditions') || '');
 
     return(
-      <Container>
+      <Container className='Conditions'>
           <div dangerouslySetInnerHTML={ { __html: body } }></div>
       </Container>
     )

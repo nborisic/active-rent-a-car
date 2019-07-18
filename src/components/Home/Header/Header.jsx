@@ -94,6 +94,7 @@ class Header extends Component {
   render() {
     const {
       data,
+      language,
     } = this.props;
 
     if (!data) {
@@ -105,7 +106,7 @@ class Header extends Component {
     return (
       <div className='Header-wrapper' id='home'>
         <Container className='Header'>
-        <div className='Header-logoContainer'>
+          <Link to={ getRoute(routeCodes.HOME, { language, page: '' }) } className='Header-logoContainer'>
             <Ratio
               ratio={ 1487/379 }
             >
@@ -114,7 +115,7 @@ class Header extends Component {
               style={ { backgroundImage: `url(${ data.logo.fields.file.url })` } }
             />
             </Ratio>
-          </div>
+          </Link>
           <div className='Header-contactContainer'>
             <div className='Header-flagContainer'>{ this.renderFlags() }</div>
             <div className='Header-contactWrapper'>

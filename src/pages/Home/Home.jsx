@@ -1,11 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 const contentful = require('contentful');
-import omit from 'lodash/omit';
 import get from 'lodash/get';
 import { withWindow } from 'react-window-decorators';
 import { spaceId, accessToken, locales } from '../../constants/contentful';
-import PageContainer from '../../components/Global/PageContainer/PageContainer';
 import { getData } from '../../reducers/home'
 import NavBar from '../../components/Home/NavBar/NavBar';
 import Header from '../../components/Home/Header/Header';
@@ -17,6 +15,7 @@ import Form from '../../components/Global/Form/Form';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import Container from '../../components/Global/Container/Container';
 import Conditions from '../Conditions/Conditions';
+import PriceList from '../PriceList/PriceList';
 import { scrollToElement } from '../../utils/helpers';
 
 import './Home.scss';
@@ -81,6 +80,8 @@ class Home extends Component {
       pocetna: () => this.renderHomePage(homeData, locale),
       conditions: () => this.renderConditions(locale),
       uslovi: () => this.renderConditions(locale),
+      cena: () => this.renderPrices(locale),
+      price: () => this.renderPrices(locale),
     }
 
     let key = params.page ? params.page : 'home';
@@ -97,6 +98,14 @@ class Home extends Component {
     return <Conditions params={ params } locale={locale}/>
   }
 
+  renderPrices = (locale) => {
+    const {
+      params,
+    } = this.props;
+
+    return <PriceList params={ params } locale={locale}/>
+  }
+
   renderHomePage = (homeData, locale) => {
 
     const body = documentToHtmlString(get(homeData[locale], 'aboutUs.aboutUs') || '');
@@ -107,7 +116,7 @@ class Home extends Component {
       <Fragment>
         <Carousel images={ homeData[locale].carouselImages }/>
         <Container className='Home-mainText' id={ id }>
-          <div dangerouslySetInnerHTML={ { __html: body } }></div>
+          <div dangerouslySetInnerHTML={ { __html: body } } ></div>
         </Container>
         <Discount data={ homeData[locale].discount } locale={ locale }/>
         <Cars data={ homeData[locale].cars } />
@@ -127,17 +136,17 @@ class Home extends Component {
       }
     } = this.props;
 
-    console.log('PROCESSS', homeData);
-
     const locale = locales[language] ? locales[language] : 'sr-Latn';
-    const defLanguage = language ? language : 'sr';
+
     if(!homeData[locale].aboutUs) {
       return null;
     }
 
+    const defLanguage = language ? language : 'sr';
+
     return (
       <Fragment>
-        <Header data={ homeData[locale].header }/>
+        <Header data={ homeData[locale].header } language={ language }/>
         <NavBar
           data={ homeData[locale].navBar }
           breakpoint={ breakpoint }

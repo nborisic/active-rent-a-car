@@ -23,9 +23,9 @@ const labels = {
     title: 'Reservation',
     carsPlaceholder: 'Select a vehicle',
     pickUpLocationLabel: 'Pick up location',
-    pickUpLocationPlaceholder: 'Pick up location',
+    pickUpLocationPlaceholder: 'Pick up',
     dropOffLocationLabel: 'Drop off location',
-    dropOffLocationPlaceholder: 'Drop off location',
+    dropOffLocationPlaceholder: 'Drop off',
     pickUpDatePlaceholder: `Pick up date`,
     dropOffDatePlaceholder: 'Drop off date',
     pickUpTimePlaceholder: 'Pick up time',
@@ -49,8 +49,8 @@ const labels = {
     carsPlaceholder: 'Izaberi vozilo',
     pickUpLocationLabel: 'Mesto preuzimanja vozila',
     dropOffLocationLabel: 'Mesto vraćanja vozila',
-    pickUpLocationPlaceholder: 'Mesto preuzimanja vozila',
-    dropOffLocationPlaceholder: 'Mesto vraćanja vozila',
+    pickUpLocationPlaceholder: 'Mesto preuzimanja',
+    dropOffLocationPlaceholder: 'Mesto vraćanja',
     pickUpDatePlaceholder: 'Datum preuzimanja',
     dropOffDatePlaceholder: 'Datum vraćanja',
     pickUpTimePlaceholder: 'Vreme preuzimanja',
@@ -342,7 +342,7 @@ class Reservation extends Component {
           render={
             ({ handleSubmit, form, submitting }) =>{
               return (
-                <form onSubmit={ handleSubmit }>
+                <form onSubmit={ handleSubmit } autoComplete="off">
                   <Grid>
                     <Col
                       className='Form-selectWrapper'

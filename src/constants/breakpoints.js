@@ -3,7 +3,6 @@ export const MEDIA_QUERIES = {
     SM: '(min-width: 0)',
     MD: '(min-width: 600px)',
     LG: '(min-width: 1100px)',
-    XL: '(min-width: 1800px)',
   };
 
   const BREAKPOINTS = [
@@ -18,10 +17,6 @@ export const MEDIA_QUERIES = {
     {
       media: MEDIA_QUERIES.LG,
       name: 'lg',
-    },
-    {
-      media: MEDIA_QUERIES.XL,
-      name: 'xl',
     },
   ];
 
