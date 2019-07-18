@@ -407,7 +407,6 @@ class Reservation extends Component {
   }
 
   handleSubmit = (e, value) => {
-    e.preventDefault();
     console.log(e, value);
 
     var templateParams = {
