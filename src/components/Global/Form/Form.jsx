@@ -415,19 +415,19 @@ class Reservation extends Component {
       from_name: 'RADI JBGT'
   };
 
-  // emailjs.send('gmail', 'template_csYppzJ4', templateParams, 'user_UaMduedrdHDA2YXykZVnM')
-  //     .then(function(response) {
-  //        console.log('SUCCESS!', response.status, response.text);
-  //     }, function(error) {
-  //        console.log('FAILED...', error);
-  //     });
-
-  emailjs.send('mailjet', 'template_csYppzJ4', templateParams, 'user_UaMduedrdHDA2YXykZVnM')
+  emailjs.send('gmail', 'template_csYppzJ4', templateParams, 'user_UaMduedrdHDA2YXykZVnM')
       .then(function(response) {
          console.log('SUCCESS!', response.status, response.text);
       }, function(error) {
          console.log('FAILED...', error);
       });
+
+  // emailjs.send('mailjet', 'template_csYppzJ4', templateParams, 'user_UaMduedrdHDA2YXykZVnM')
+  //     .then(function(response) {
+  //        console.log('SUCCESS!', response.status, response.text);
+  //     }, function(error) {
+  //        console.log('FAILED...', error);
+  //     });
 
   }
 
