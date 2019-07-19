@@ -42,6 +42,7 @@ class NavBar extends Component {
               { item.label }
             </div>
           )
+
         }
 
         return (
