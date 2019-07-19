@@ -91,38 +91,32 @@ class NavBar extends Component {
 
   render() {
     const {
-      breakpoint,
-    } = this.props;
-
-    const {
       isBurgerOpen,
     } = this.state;
 
-    const isMdBreakpoint = breakpoint === 'sm';
 
     return (
       <div className='NavBar-container'>
-        { isMdBreakpoint ?
-          <Fragment>
-            <Menu left isOpen={ isBurgerOpen } width={ '45%' } onStateChange={ this.closeBurger } >
-              { this.renderNavBars() }
-            </Menu>
-            <div className='NavBar-hamburgerButton'>
-              <HamburgerButton
-                open={ isBurgerOpen }
-                onClick={ this.openBurger }
-                width={30}
-                height={20}
-                strokeWidth={4}
-                left={20}
-                color='black'
-                animationDuration={0.3}
-              />
-            </div>
-        </Fragment> :
-        <Container >
+        <div className='NavBar-wrapper'>
+          <Menu left isOpen={ isBurgerOpen } width={ '45%' } onStateChange={ this.closeBurger } >
+            { this.renderNavBars() }
+          </Menu>
+          <div className='NavBar-hamburgerButton'>
+            <HamburgerButton
+              open={ isBurgerOpen }
+              onClick={ this.openBurger }
+              width={30}
+              height={20}
+              strokeWidth={4}
+              left={20}
+              color='black'
+              animationDuration={0.3}
+            />
+          </div>
+        </div>
+        <Container className='NavBar-wrapper--sm'>
           <div className='NavBar'>{ this.renderNavBars() }</div>
-        </Container> }
+        </Container>
       </div>
     );
   }

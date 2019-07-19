@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 const contentful = require('contentful');
-import { withWindow } from 'react-window-decorators';
 import get from 'lodash/get';
 import { connect } from 'react-redux';
 import { spaceId, accessToken } from '../../constants/contentful';
@@ -87,10 +86,7 @@ class PriceList extends Component {x
   renderSingleCar = (carClass, car) => {
     const {
       locale,
-      breakpoint,
     } = this.props;
-
-    const isSmallBp = breakpoint === 'sm';
 
     return (
       <Grid>
@@ -105,7 +101,6 @@ class PriceList extends Component {x
           <BookButton
             className='PriceList-bookButton'
             locale={ locale }
-            isShort={ !isSmallBp }
           />
         </Col>
       </Grid>
@@ -177,19 +172,17 @@ class PriceList extends Component {x
     const {
       priceData,
       locale,
-      breakpoint,
     } = this.props;
 
     if(!priceData[locale].price) {
       return null;
     }
 
-    const isSmallBp = breakpoint === 'sm';
-
     return(
       <Container className='PriceList'>
         <div className='PriceList-title'>{ headingLabels[locale].timeRange } <span>{ priceData[locale].price.timeSpan }</span></div>
-        { isSmallBp ? this.renderSmallPriceList() : this.renderPriceList() }
+        <div className='PriceList-prices--sm'>{ this.renderSmallPriceList() }</div>
+        <div className='PriceList-prices'>{ this.renderPriceList() }</div>
       </Container>
     )
   }
@@ -197,5 +190,5 @@ class PriceList extends Component {x
 
 export default connect((state) => ({
   priceData: get(state, 'price.data', []),
-}))(withWindow(PriceList));
+}))(PriceList);
 

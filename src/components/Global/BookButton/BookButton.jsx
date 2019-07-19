@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
-import Container from '../../Global/Container/Container';
-import Grid from '../../Global/Grid/Grid';
-import Col from '../../Global/Column/Column';
 import { scrollToElement } from '../../../utils/helpers';
 
 import './BookButton.scss';
@@ -26,7 +23,6 @@ class BookButton extends Component {
     const {
       locale,
       className,
-      isShort,
     } = this.props;
 
     const buttonClassName = cx('BookButton-wrapper',{
@@ -39,7 +35,8 @@ class BookButton extends Component {
           className='BookButton'
           onClick={ this.handleClick }
         >
-          { isShort ? labelMapShort[locale] :  labelMap[locale] }
+          <span className='BookButton-label'>{ labelMapShort[locale] }</span>
+          <span className='BookButton-label--sm'>{ labelMap[locale] }</span>
         </button>
       </div>
     )

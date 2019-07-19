@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 const contentful = require('contentful');
 import get from 'lodash/get';
-import { withWindow } from 'react-window-decorators';
 import { spaceId, accessToken, locales } from '../../constants/contentful';
 import { getData } from '../../reducers/home'
 import NavBar from '../../components/Home/NavBar/NavBar';
@@ -138,7 +137,6 @@ class Home extends Component {
   render() {
     const {
       homeData,
-      breakpoint,
       match,
       match: {
         params: {
@@ -160,7 +158,6 @@ class Home extends Component {
         <Header data={ homeData[locale].header } language={ language }/>
         <NavBar
           data={ homeData[locale].navBar }
-          breakpoint={ breakpoint }
           language={ defLanguage }
           match={ match }
         />
@@ -178,4 +175,4 @@ class Home extends Component {
 
 export default connect((state) => ({
   homeData: get(state, 'home.data', []),
-}))(withWindow(Home));
+}))(Home);

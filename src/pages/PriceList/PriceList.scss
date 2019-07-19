@@ -32,6 +32,18 @@
   }
 }
 
+.PriceList-prices {
+  @include sm-only {
+    display: none;
+  }
+}
+
+.PriceList-prices--sm {
+  @include md {
+    display: none;
+  }
+}
+
 .PriceList-heading {
   background: $orange;
   font-weight: 550;

@@ -30,3 +30,15 @@
     border-color: rgba($black, 0.3);
   }
 }
+
+.BookButton-label {
+  @include sm-only {
+    display: none;
+  }
+}
+
+.BookButton-label--sm {
+  @include md {
+    display: none;
+  }
+}

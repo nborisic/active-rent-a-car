@@ -1,5 +1,20 @@
 @import "../../../scss/base";
 
+.NavBar-wrapper {
+  display: flex;
+  width: 100%;
+
+  @include md {
+    display: none;
+  }
+}
+
+.NavBar-wrapper--sm {
+  @include sm-only {
+    display: none;
+  }
+}
+
 .NavBar-container {
   border-top: thin solid $black;
   border-bottom: thin solid $black;
@@ -47,6 +62,8 @@
     }
   }
 }
+
+
 
 .NavBar-item {
   color: $white;
