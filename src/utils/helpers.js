@@ -1,6 +1,7 @@
 import isEmpty from 'validator/lib/isEmpty';
 import isEmail from 'validator/lib/isEmail';
 import animateScrollTo from 'animated-scroll-to';
+const contentful = require('contentful');
 
 export function slugify(str) {
   str = str.replace(/^\s+|\s+$/g, ''); // trim
@@ -49,4 +50,25 @@ export function scrollToElement(id) {
   const conversionOffset = getElementOffsetTop(element) - 120;
 
   animateScrollTo(conversionOffset);
+}
+
+
+export function getContentfulData(locale, entriesToGet, reducerFunction, dispatch) {
+  const spaceId = process.env.CONTENTFUL_SPACE_ID;
+  const accessToken = process.env.CONTENTFUL_ACC_TOKEN;
+
+  const client = contentful.createClient({
+    space: spaceId,
+    accessToken: accessToken,
+  });
+
+  client.getEntries({
+    include: 10,
+    'sys.contentType.sys.id[in]': entriesToGet,
+    locale,
+  })
+  .then((response) => {
+    dispatch(reducerFunction(response.items, locale))
+  })
+  .catch(console.error)
 }

@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-const contentful = require('contentful');
+
 import get from 'lodash/get';
-import { spaceId, accessToken, locales } from '../../constants/contentful';
+import { locales } from '../../constants/contentful';
 import { getData } from '../../reducers/home'
 import NavBar from '../../components/Home/NavBar/NavBar';
 import Header from '../../components/Home/Header/Header';
@@ -15,11 +15,12 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import Container from '../../components/Global/Container/Container';
 import Conditions from '../Conditions/Conditions';
 import PriceList from '../PriceList/PriceList';
-import { scrollToElement } from '../../utils/helpers';
+import { scrollToElement, getContentfulData } from '../../utils/helpers';
 import ReactGA from 'react-ga';
 import { gaId } from '../../constants/contentful';
 
 
+const entriesToGet = ['aboutUs', 'carousel', 'discountActions', 'carsInStoc', 'footer', 'navBar', 'header', 'form'].join(',', ',');
 
 import './Home.scss';
 
@@ -36,7 +37,7 @@ class Home extends Component {
     const locale = props.match.params.language ? locales[props.match.params.language] : locales.sr;
 
     if(props.homeData && props.homeData[locale] && !props.homeData[locale].aboutUs) {
-      this.getContentfulData(locale)
+      getContentfulData(locale, entriesToGet, getData, props.dispatch)
     }
   }
 
@@ -47,7 +48,8 @@ class Home extends Component {
         params: {
           language,
         }
-      }
+      },
+      dispatch
     } = this.props;
 
     // scroll to element when not on home page
@@ -60,31 +62,8 @@ class Home extends Component {
     const locale = language ? locales[language] : locales.sr;
 
     if (prevProps.match.params.language !== language && !this.props.homeData[locale].aboutUs) {
-      this.getContentfulData(locale)
+      getContentfulData(locale, entriesToGet, getData, dispatch)
     }
-  }
-
-  getContentfulData = (locale) => {
-    // const spaceId = process.env.CONTENTFUL_SPACE_ID;
-    // const accessToken = process.env.CONTENTFUL_ACC_TOKEN;
-
-
-    const entriesToGet = ['aboutUs', 'carousel', 'discountActions', 'carsInStoc', 'footer', 'navBar', 'header', 'form'].join(',', ',');
-
-    const client = contentful.createClient({
-      space: spaceId,
-      accessToken: accessToken,
-    });
-
-    client.getEntries({
-      include: 10,
-      'sys.contentType.sys.id[in]': entriesToGet,
-      locale,
-    })
-    .then((response) => {
-      this.props.dispatch(getData(response.items, locale))
-    })
-    .catch(console.error)
   }
 
   returnSubPages = (params, homeData, locale) => {

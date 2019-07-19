@@ -2,11 +2,11 @@ import React, { Component, Fragment } from 'react';
 const contentful = require('contentful');
 import get from 'lodash/get';
 import { connect } from 'react-redux';
-import { spaceId, accessToken } from '../../constants/contentful';
 import { getPriceData } from '../../reducers/price';
 import Container from '../../components/Global/Container/Container';
 import Grid from '../../components/Global/Grid/Grid';
 import Col from '../../components/Global/Column/Column';
+import { getContentfulData } from '../../utils/helpers';
 
 import './PriceList.scss';
 import BookButton from '../../components/Global/BookButton/BookButton';
@@ -37,36 +37,20 @@ const headingLabels = {
   }
 }
 
+const entriesToGet = ['allClasses'].join(',', ',');
+
 class PriceList extends Component {x
   componentDidMount() {
     const {
       locale,
+      dispatch,
     } = this.props;
 
 
     scrollTo(0,0);
 
-      this.getContentfulData(locale)
+    getContentfulData(locale, entriesToGet, getPriceData, dispatch)
 
-  }
-
-  getContentfulData = (locale) => {
-    const entriesToGet = ['allClasses'].join(',', ',');
-
-    const client = contentful.createClient({
-      space: spaceId,
-      accessToken: accessToken,
-    });
-
-    client.getEntries({
-      include: 10,
-      'sys.contentType.sys.id[in]': entriesToGet,
-      locale,
-    })
-    .then((response) => {
-      this.props.dispatch(getPriceData(response.items, locale))
-    })
-    .catch(console.error)
   }
 
   renderHeader = (locale) => {
@@ -159,7 +143,7 @@ class PriceList extends Component {x
 
     return item.fields.cars.map((car) => {
       return (
-        <Grid>
+        <Grid key= {car.sys.id } >
           <Col sm={2}>
             { this.renderHeader(locale) }
           </Col>

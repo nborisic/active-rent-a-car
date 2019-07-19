@@ -2,46 +2,26 @@ import React, { Component, Fragment } from 'react';
 const contentful = require('contentful');
 import get from 'lodash/get';
 import { connect } from 'react-redux';
-import { spaceId, accessToken, locales } from '../../constants/contentful';
 import { getConditionsData } from '../../reducers/conditions';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import Container from '../../components/Global/Container/Container';
-// import Grid from '../../Global/Grid/Grid';
-// import Col from '../../Global/Column/Column';
-// import Ratio from 'react-ratio';
+import { getContentfulData } from '../../utils/helpers';
 
 import './Conditions.scss';
+
+const entriesToGet = ['termsAndContitions'].join(',', ',');
 
 class Conditions extends Component {
   componentDidMount() {
     const {
       locale,
+      dispatch
     } = this.props;
 
 
     scrollTo(0,0);
 
-      this.getContentfulData(locale)
-
-  }
-
-  getContentfulData = (locale) => {
-    const entriesToGet = ['termsAndContitions'].join(',', ',');
-
-    const client = contentful.createClient({
-      space: spaceId,
-      accessToken: accessToken,
-    });
-
-    client.getEntries({
-      include: 10,
-      'sys.contentType.sys.id[in]': entriesToGet,
-      locale,
-    })
-    .then((response) => {
-      this.props.dispatch(getConditionsData(response.items, locale))
-    })
-    .catch(console.error)
+    getContentfulData(locale, entriesToGet, getConditionsData, dispatch);
   }
 
   render() {
