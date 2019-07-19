@@ -29,7 +29,7 @@ class Discount extends Component {
               md={ 4 }
               className='Discount-button'
             >
-              <BookButton locale={ locale }/>
+              <BookButton locale={ locale } isDiscount />
             </Col>
           </Grid>
         </Container>

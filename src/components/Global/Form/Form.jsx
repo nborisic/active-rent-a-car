@@ -43,6 +43,7 @@ const labels = {
     rentalConditions: 'rental conditions',
     submitButton: 'Submit',
     accessories: 'Accessories',
+    requiredLabel: '* required fields'
   },
   ['sr-Latn']: {
     title: 'Rezervacija',
@@ -68,6 +69,7 @@ const labels = {
     rentalConditions: 'uslovima najma',
     submitButton: 'Pošalji',
     accessories: 'Dodaci',
+    requiredLabel: '* obavezna polja'
   }
 }
 
@@ -339,7 +341,7 @@ class Reservation extends Component {
             ({ handleSubmit, form, submitting }) =>{
               return (
                 <form onSubmit={ handleSubmit } autoComplete="off">
-                  <Grid>
+                  <Grid className='Form-container'>
                     <Col
                       className='Form-selectWrapper'
                       md={ 6 }
@@ -350,7 +352,7 @@ class Reservation extends Component {
                       </Grid>
                       { this.renderAdditions(additions, locale) }
                     </Col>
-                    <Col md={6}>
+                    <Col md={6} className='Form-contactWrapper'>
                       <Grid className='Form-contact'>
                         { this.renderInputs(inputs, locale) }
                         <Col>
@@ -385,6 +387,7 @@ class Reservation extends Component {
                           </Field>
                         </Col>
                       </Grid>
+                      <div className='Form-required'>{ labels[locale].requiredLabel }</div>
                     </Col>
                   </Grid>
               <button
@@ -403,9 +406,6 @@ class Reservation extends Component {
   }
 
   handleSubmit = (value, e) => {
-    console.log(e, value);
-    console.log(value);
-
     var templateParams = {
       additions: value.additions ? value.additions.join(',', ', ') : '/',
       birthday: value.birthday,

@@ -23,6 +23,7 @@ class BookButton extends Component {
     const {
       locale,
       className,
+      isDiscount,
     } = this.props;
 
     const buttonClassName = cx('BookButton-wrapper',{
@@ -35,7 +36,7 @@ class BookButton extends Component {
           className='BookButton'
           onClick={ this.handleClick }
         >
-          <span className='BookButton-label'>{ labelMapShort[locale] }</span>
+          <span className='BookButton-label'>{ isDiscount ? labelMap[locale] : labelMapShort[locale] }</span>
           <span className='BookButton-label--sm'>{ labelMap[locale] }</span>
         </button>
       </div>

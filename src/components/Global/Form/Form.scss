@@ -14,7 +14,10 @@
 .Form-selectWrapper {
   display: flex;
   flex-direction: column;
-  margin-bottom: 40px;
+  @include sm-only {
+    margin-bottom: 40px;
+  }
+
 
   label {
     @include body;
@@ -28,6 +31,18 @@
 
   select.Form-select--hasValue {
     color: $black;
+  }
+}
+
+.Form-container {
+  margin-bottom: 20px;
+
+  @include md {
+    margin-bottom: 40px;
+  }
+
+  @include lg {
+    margin-bottom: 60px;
   }
 }
 
@@ -122,6 +137,16 @@
     min-height: 200px;
     padding-top: 7px;
   }
+}
+
+.Form-contactWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.Form-required {
+  margin-top: 20px;
 }
 
 

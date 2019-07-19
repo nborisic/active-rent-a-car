@@ -62,10 +62,13 @@ class Home extends Component {
     if (prevProps.match.params.language !== language && !this.props.homeData[locale].aboutUs) {
       this.getContentfulData(locale)
     }
-
   }
 
   getContentfulData = (locale) => {
+    // const spaceId = process.env.CONTENTFUL_SPACE_ID;
+    // const accessToken = process.env.CONTENTFUL_ACC_TOKEN;
+
+
     const entriesToGet = ['aboutUs', 'carousel', 'discountActions', 'carsInStoc', 'footer', 'navBar', 'header', 'form'].join(',', ',');
 
     const client = contentful.createClient({
