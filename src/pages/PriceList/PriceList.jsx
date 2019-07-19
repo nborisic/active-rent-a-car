@@ -1,5 +1,4 @@
-import React, { Component, Fragment } from 'react';
-const contentful = require('contentful');
+import React, { Component } from 'react';
 import get from 'lodash/get';
 import { connect } from 'react-redux';
 import { getPriceData } from '../../reducers/price';
@@ -7,6 +6,7 @@ import Container from '../../components/Global/Container/Container';
 import Grid from '../../components/Global/Grid/Grid';
 import Col from '../../components/Global/Column/Column';
 import { getContentfulData } from '../../utils/helpers';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 import './PriceList.scss';
 import BookButton from '../../components/Global/BookButton/BookButton';
@@ -39,18 +39,20 @@ const headingLabels = {
 
 const entriesToGet = ['allClasses'].join(',', ',');
 
-class PriceList extends Component {x
-  componentDidMount() {
+class PriceList extends Component {
+  constructor(props) {
+    super(props)
+
     const {
       locale,
       dispatch,
-    } = this.props;
-
+    } = props;
 
     scrollTo(0,0);
 
-    getContentfulData(locale, entriesToGet, getPriceData, dispatch)
-
+    if(props.priceData && props.priceData[locale] && !props.priceData[locale].price) {
+      getContentfulData(locale, entriesToGet, getPriceData, dispatch)
+    }
   }
 
   renderHeader = (locale) => {
@@ -102,7 +104,6 @@ class PriceList extends Component {x
         </div>
       );
     })
-
   }
 
   renderPriceList = () => {
@@ -165,11 +166,14 @@ class PriceList extends Component {x
       return null;
     }
 
+    const body = documentToHtmlString(get(priceData[locale], 'price.additionalNotes') || '');
+
     return(
       <Container className='PriceList'>
         <div className='PriceList-title'>{ headingLabels[locale].timeRange } <span>{ priceData[locale].price.timeSpan }</span></div>
         <div className='PriceList-prices--sm'>{ this.renderSmallPriceList() }</div>
         <div className='PriceList-prices'>{ this.renderPriceList() }</div>
+        <div dangerouslySetInnerHTML={ { __html: body } } ></div>
       </Container>
     )
   }

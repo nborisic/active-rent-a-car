@@ -9,11 +9,8 @@
 }
 
 .Discount-button {
-  @include sm-only {
-    justify-content: flex-end;
-  }
-
   display: flex;
+  justify-content: flex-end;
 }
 
 .Discount-container {

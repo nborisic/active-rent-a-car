@@ -33,8 +33,18 @@
 }
 
 .PriceList-prices {
+  margin-bottom: 30px;
+
   @include sm-only {
     display: none;
+  }
+
+  @include md {
+    margin-bottom: 40px;
+  }
+
+  @include lg {
+    margin-bottom: 60px;
   }
 }
 

@@ -103,7 +103,7 @@ class Header extends Component {
       return null
     }
 
-    const telephone = data.contact.replace(/\+/g, '');
+    const telephone = data.contact.replace(/[\+\s]/g, '');
 
     return (
       <div className='Header-wrapper' id='home'>

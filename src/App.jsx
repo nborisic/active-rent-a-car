@@ -10,6 +10,7 @@ import configureStore from './config/store';
 
 import BREAKPOINTS from './constants/breakpoints';
 import Routes from './Routes';
+import ErrorHandler from './pages/ErrorHandle/ErrorHandle';
 
 // tslint:disable-next-line
 new WindowManager(BREAKPOINTS, 50);
@@ -23,13 +24,13 @@ const history = createHistory();
 history.listen((location, action) => {
   ReactGA.pageview(location.pathname + location.search);
 });
-console.log(process.env.ENVIRONMENT);
-
 
 const App = () => {
   return (
     <Provider store={ store }>
-      <Routes />
+      <ErrorHandler>
+        <Routes />
+      </ErrorHandler>
     </Provider>
   );
 };

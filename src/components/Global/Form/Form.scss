@@ -146,6 +146,7 @@
 }
 
 .Form-required {
+  @include body;
   margin-top: 20px;
 }
 

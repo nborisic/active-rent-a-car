@@ -12,16 +12,19 @@ import './Conditions.scss';
 const entriesToGet = ['termsAndContitions'].join(',', ',');
 
 class Conditions extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props)
+
     const {
       locale,
-      dispatch
-    } = this.props;
-
+      dispatch,
+    } = props;
 
     scrollTo(0,0);
 
-    getContentfulData(locale, entriesToGet, getConditionsData, dispatch);
+    if(props.conditionsData && props.conditionsData[locale] && !props.conditionsData[locale].conditions) {
+      getContentfulData(locale, entriesToGet, getConditionsData, dispatch);
+    }
   }
 
   render() {
@@ -29,6 +32,10 @@ class Conditions extends Component {
       conditionsData,
       locale,
     } = this.props;
+
+    if(!conditionsData[locale].conditions) {
+      return null;
+    }
 
     const body = documentToHtmlString(get(conditionsData[locale], 'conditions') || '');
 

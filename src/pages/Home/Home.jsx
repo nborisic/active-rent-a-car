@@ -16,6 +16,7 @@ import Container from '../../components/Global/Container/Container';
 import Conditions from '../Conditions/Conditions';
 import PriceList from '../PriceList/PriceList';
 import { scrollToElement, getContentfulData } from '../../utils/helpers';
+import MetaData from '../../components/Global/MetaData/MetaData';
 import ReactGA from 'react-ga';
 import { gaId } from '../../constants/contentful';
 
@@ -137,6 +138,7 @@ class Home extends Component {
 
     return (
       <Fragment>
+        <MetaData language={ defLanguage }/>
         <Header data={ homeData[locale].header } language={ language }/>
         <NavBar
           data={ homeData[locale].navBar }
