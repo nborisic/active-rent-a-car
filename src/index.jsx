@@ -14,16 +14,7 @@ if (!isSnap) {
 
 const rootElement = document.getElementById('root');
 
-let shouldHydrate = false;
-if (rootElement) {
-  // We hydrate all of the pages, but grid which is completely re-rendered on the client
-  // This allows us access to the window size which is used for scaling calculations
-  // This is mandatory as since React 16 you can't rely on React SSR patching up differences
-  // https://github.com/reactjs/reactjs.org/issues/25
-  shouldHydrate = rootElement.hasChildNodes() && !(window.location.pathname.search('/') === 0);
-}
-
-if (shouldHydrate) {
+if (rootElement && rootElement.hasChildNodes()) {
   hydrate(<App />, rootElement);
 } else {
   render(<App />, rootElement);
