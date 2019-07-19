@@ -207,4 +207,22 @@
   @include lg {
     margin-left: 40px;
   }
+
+  div {
+    width: 30px;
+    height: 20px;
+
+    background-size: cover;
+    background-position: center center;
+
+    @include md {
+      width: 30px;
+      height: 25px;
+    }
+
+    @include lg {
+      width: 40px;
+      height: 30px;
+    }
+  }
 }

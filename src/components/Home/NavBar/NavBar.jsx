@@ -8,6 +8,7 @@ import { HamburgerButton } from 'react-hamburger-button';
 import { scrollToElement } from '../../../utils/helpers';
 import { getRoute, routeCodes } from '../../../constants/routes';
 import withRedirect from '../../../decorators/redirect';
+import animateScrollTo from 'animated-scroll-to';
 
 class NavBar extends Component {
   state = {
@@ -21,6 +22,7 @@ class NavBar extends Component {
       match,
     } = this.props;
 
+    const homeParams = ['pocetna', 'home'];
     const homeIds = ['aboutUs', 'vehicles'];
     const needsToRedirectPages = ['conditions', 'uslovi', 'price', 'cena'];
 
@@ -30,6 +32,18 @@ class NavBar extends Component {
       const isRedirectLink = homeIds.indexOf(item.id) !== -1;
 
       if (item.params) {
+        if((!match.params.page || homeParams.indexOf(match.params.page) !== -1) && homeParams.indexOf(item.params.page) !== -1) {
+          return (
+            <div
+            onClick={() => animateScrollTo(0)}
+            key={ item.label }
+            className='NavBar-item'
+            >
+              { item.label }
+            </div>
+          )
+        }
+
         return (
           <Link
             onClick={ this.closeBurger }
@@ -70,6 +84,9 @@ class NavBar extends Component {
 
   handleInnerScroll = (itemId) => {
     this.forceCloseBurger();
+
+    console.log(itemId);
+
 
     scrollToElement(itemId);
   }

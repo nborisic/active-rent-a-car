@@ -5,10 +5,10 @@ import Container from '../../Global/Container/Container';
 import Telephone from '../../../assets/telephone.svg';
 import Whatsapp from '../../../assets/whatsapp.svg';
 import Viber from '../../../assets/viber.svg';
-import RsFlag from '../../../assets/rs-flag.svg';
 import GrbFlag from '../../../assets/grb-flag.svg';
 import Mail from '../../../assets/mail.svg';
 import { routeCodes } from '../../../constants/routes';
+import rsFlag from '../../../assets/rs-flag.png';
 
 
 import './Header.scss';
@@ -70,7 +70,9 @@ class Header extends Component {
           className='Header-flag'
           type='button'
         >
-          <RsFlag />
+          <div
+            style={ { backgroundImage: `url(${ rsFlag })` } }
+          />
         </Link>
       </Fragment>
     );

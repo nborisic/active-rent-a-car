@@ -16,22 +16,24 @@ const headingLabels = {
   ['en-US']: {
     class: 'Class',
     vehicle: 'Vehicle make',
-    elevenToFifteenDayes: '11-15 days',
-    fourToSixDays:  '4-6 days',
-    sevenToTenDays: '7-10 days',
-    sixteendPlusDays: '16+ days',
-    twoToThreeDays: '2-3 days',
-    timeRange: 'Prices for the period form'
+    elevenToFifteenDayes: '11-15',
+    fourToSixDays:  '4-6',
+    sevenToTenDays: '7-10',
+    sixteendPlusDays: '16+',
+    twoToThreeDays: '2-3',
+    timeRange: 'Prices for the period form',
+    days: 'days'
   },
   ['sr-Latn']: {
     class: 'Klasa',
     vehicle: 'Marka vozila',
-    elevenToFifteenDayes: '11-15 dana',
-    fourToSixDays:  '4-6 dana',
-    sevenToTenDays: '7-10 dana',
-    sixteendPlusDays: '16+ dana',
-    twoToThreeDays: '2-3 dana',
+    elevenToFifteenDayes: '11-15',
+    fourToSixDays:  '4-6',
+    sevenToTenDays: '7-10',
+    sixteendPlusDays: '16+',
+    twoToThreeDays: '2-3',
     timeRange: 'Cene za period od',
+    days: 'dana'
   }
 }
 
@@ -73,11 +75,12 @@ class PriceList extends Component {x
         <Grid >
           <Col md={1}>{ headingLabels[locale].class }</Col>
           <Col md={4}>{ headingLabels[locale].vehicle }</Col>
-          <Col md={1}>{ headingLabels[locale].twoToThreeDays }</Col>
-          <Col md={1}>{ headingLabels[locale].fourToSixDays }</Col>
-          <Col md={1}>{ headingLabels[locale].sevenToTenDays }</Col>
-          <Col md={1}>{ headingLabels[locale].elevenToFifteenDayes }</Col>
-          <Col md={1}>{ headingLabels[locale].sixteendPlusDays }</Col>
+          <Col md={1}>{ headingLabels[locale].twoToThreeDays }<span className='PriceList-days--sm'> { headingLabels[locale].days }</span></Col>
+          <Col md={1}>{ headingLabels[locale].fourToSixDays }<span className='PriceList-days--sm'> { headingLabels[locale].days }</span></Col>
+          <Col md={1}>{ headingLabels[locale].sevenToTenDays }<span className='PriceList-days--sm'> { headingLabels[locale].days }</span></Col>
+          <Col md={1}>{ headingLabels[locale].elevenToFifteenDayes }<span className='PriceList-days--sm'> { headingLabels[locale].days }</span></Col>
+          <Col md={1}>{ headingLabels[locale].sixteendPlusDays }<span className='PriceList-days--sm'> { headingLabels[locale].days }</span></Col>
+          <Col md={2} className='PriceList-days'>{ headingLabels[locale].days }</Col>
         </Grid>
       </div>
     )
