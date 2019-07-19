@@ -5,6 +5,7 @@
   "scripts": {
     "start": "parcel public/index.html",
     "build": "./build.sh"
+    "build": "rm -rf build && parcel build public/index.html --out-dir build && react-snap"
   },
   "browserslist": [
     "last 1 Chrome version"
