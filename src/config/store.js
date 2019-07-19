@@ -19,8 +19,6 @@ export default () => {
 
   // Tell react-snap how to save Redux state
   window.snapSaveState = () => {
-    console.log('uzet store',store.getState(),);
-
     return ({
       __PRELOADED_STATE__: store.getState(),
     });

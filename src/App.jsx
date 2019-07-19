@@ -22,7 +22,6 @@ const store = configureStore().store;
 const history = createHistory();
 history.listen((location, action) => {
   ReactGA.pageview(location.pathname + location.search);
-  console.log(location.pathname)
 });
 
 
