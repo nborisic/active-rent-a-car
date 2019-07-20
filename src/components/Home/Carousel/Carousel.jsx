@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import Swiper from 'react-id-swiper';
 import Ratio from 'react-ratio';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 
 import './Carousel.scss';
 
 
-class Carousel extends Component {
+class Swiper extends Component {
   componentDidMount() {
     scrollTo(0,0);
   }
@@ -15,43 +16,43 @@ class Carousel extends Component {
       images,
     } = this.props;
 
+    if(!images) {
+      return null
+    }
 
     return images.map(image => {
       return (
-        <div
-          key={ image.fields.file.url }
+        <img
+          key={ image.sys.id }
           className='Carousel-image'
-          style={ { backgroundImage: `url(https:${ image.fields.file.url })` } }
+          src={`https:${ image.fields.file.url }`}
         />
       )
     })
   }
 
   render() {
-    const params = {
-      shouldSwiperUpdate: true,
-      pagination: {
-        el: '.swiper-pagination',
-        type: 'bullets',
-        clickable: true
-      },
-      loop: true,
-      autoplay: true,
-      delay: 6000,
-    }
-
     return(
       <Ratio
         ratio={ 16/9 }
       >
-        <Swiper { ...params }>
+        <Carousel
+          autoPlay
+          showThumbs={false}
+          infiniteLoop={true}
+          showArrows={ false }
+          showStatus={ false }
+          interval={ 5000 }
+        >
+        {/* <Swiper { ...params }> */}
           { this.renderImages() }
-        </Swiper>
+        {/* </Swiper> */}
+        </Carousel>
       </Ratio>
     )
   }
 }
 
 
-export default Carousel;
+export default Swiper;
 

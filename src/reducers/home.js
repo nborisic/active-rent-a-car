@@ -10,7 +10,7 @@ const sectionMap = {
     navBar: 'navBar',
     discount: 'discount',
     address: 'footer',
-    carouselImages: 'carouselImages',
+    sliderImages: 'sliderImages',
     logo: 'header',
     additions: 'form',
 }
@@ -23,7 +23,7 @@ export const getHomeDataReducer = new Reducer('newsList', {
       cars: [],
       navBar: [],
       discount: '',
-      carouselImages: [],
+      sliderImages: [],
       header: null,
       form: null,
     },
@@ -33,7 +33,7 @@ export const getHomeDataReducer = new Reducer('newsList', {
       cars: [],
       navBar: [],
       discount: '',
-      carouselImages: [],
+      sliderImages: [],
       header: null,
       form: null,
     },
@@ -42,6 +42,8 @@ export const getHomeDataReducer = new Reducer('newsList', {
 
 const get = getHomeDataReducer.addAction('saveData', (state, action) => {
     const data = {};
+    console.log('actko  data',action.data);
+
 
     const locale = action.locale ? action.locale : 'sr-Latn';
 

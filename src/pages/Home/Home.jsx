@@ -21,7 +21,7 @@ import ReactGA from 'react-ga';
 import { gaId } from '../../constants/contentful';
 
 
-const entriesToGet = ['aboutUs', 'carousel', 'discountActions', 'carsInStoc', 'footer', 'navBar', 'header', 'form'].join(',', ',');
+const entriesToGet = ['aboutUs', 'sliderImages', 'discountActions', 'carsInStoc', 'footer', 'navBar', 'header', 'form'].join(',', ',');
 
 import './Home.scss';
 
@@ -104,11 +104,10 @@ class Home extends Component {
     const body = documentToHtmlString(get(homeData[locale], 'aboutUs.aboutUs') || '');
 
     const id = get(homeData[locale], 'aboutUs.id')
-    console.log('images',homeData[locale].carouselImages);
 
     return (
       <Fragment>
-        <Carousel images={ homeData[locale].carouselImages }/>
+        <Carousel images={ homeData[locale].sliderImages }/>
         <Container className='Home-mainText' id={ id }>
           <div dangerouslySetInnerHTML={ { __html: body } } ></div>
         </Container>
@@ -134,6 +133,8 @@ class Home extends Component {
     if(!homeData[locale].aboutUs) {
       return null;
     }
+
+    console.log(homeData);
 
     const defLanguage = language ? language : 'sr';
 
