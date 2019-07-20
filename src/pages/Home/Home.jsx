@@ -18,7 +18,6 @@ import PriceList from '../PriceList/PriceList';
 import { scrollToElement, getContentfulData } from '../../utils/helpers';
 import MetaData from '../../components/Global/MetaData/MetaData';
 import ReactGA from 'react-ga';
-import { gaId } from '../../constants/contentful';
 
 
 const entriesToGet = ['aboutUs', 'sliderImages', 'discountActions', 'carsInStoc', 'footer', 'navBar', 'header', 'form'].join(',', ',');
@@ -29,11 +28,10 @@ class Home extends Component {
   constructor(props) {
     super(props);
 
-    // ReactGA.initialize(gaId);
-    // props.history.listen((location, action) => {
-    //     ReactGA.pageview(location.pathname + location.search);
-    //     console.log(location.pathname)
-    // });
+    ReactGA.initialize(process.env.GA_ID.toString());
+    props.history.listen((location, action) => {
+        ReactGA.pageview(location.pathname + location.search);
+    });
 
     const locale = props.match.params.language ? locales[props.match.params.language] : locales.sr;
 

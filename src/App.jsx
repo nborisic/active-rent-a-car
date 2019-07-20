@@ -1,9 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { WindowManager } from 'react-window-decorators';
-import createHistory from 'history/createBrowserHistory'
 import smoothscroll from 'smoothscroll-polyfill';
-import ReactGA from 'react-ga';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 
@@ -20,11 +18,6 @@ new WindowManager(BREAKPOINTS, 50);
 smoothscroll.polyfill();
 
 const store = configureStore().store;
-
-const history = createHistory();
-history.listen((location, action) => {
-  ReactGA.pageview(location.pathname + location.search);
-});
 
 const App = () => {
   return (
