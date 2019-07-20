@@ -104,6 +104,7 @@ class Home extends Component {
     const body = documentToHtmlString(get(homeData[locale], 'aboutUs.aboutUs') || '');
 
     const id = get(homeData[locale], 'aboutUs.id')
+    console.log('images',homeData[locale].carouselImages);
 
     return (
       <Fragment>

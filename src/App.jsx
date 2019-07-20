@@ -4,6 +4,7 @@ import { WindowManager } from 'react-window-decorators';
 import createHistory from 'history/createBrowserHistory'
 import smoothscroll from 'smoothscroll-polyfill';
 import ReactGA from 'react-ga';
+import 'react-id-swiper/lib/styles/scss/swiper.scss';
 
 
 import configureStore from './config/store';

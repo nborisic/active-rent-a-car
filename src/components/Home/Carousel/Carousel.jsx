@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import Container from '../../Global/Container/Container';
 import Swiper from 'react-id-swiper';
 import Ratio from 'react-ratio';
 
 import './Carousel.scss';
-import 'react-id-swiper/lib/styles/scss/swiper.scss';
+
 
 class Carousel extends Component {
   componentDidMount() {
@@ -16,12 +15,13 @@ class Carousel extends Component {
       images,
     } = this.props;
 
+
     return images.map(image => {
       return (
         <div
           key={ image.fields.file.url }
           className='Carousel-image'
-          style={ { backgroundImage: `url(${ image.fields.file.url })` } }
+          style={ { backgroundImage: `url(https:${ image.fields.file.url })` } }
         />
       )
     })
