@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import Ratio from 'react-ratio';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
 import './Carousel.scss';
