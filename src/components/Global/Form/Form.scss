@@ -150,7 +150,6 @@
   margin-top: 20px;
 }
 
-
 .Form-submit {
   padding: 10px;
   background: $grey;
@@ -182,31 +181,12 @@
     }
   }
 
-
-  @-webkit-keyframes dash {
-    0% {
-      stroke-dashoffset: 1000;
-    }
-    100% {
-      stroke-dashoffset: 0;
-    }
-  }
-
   @keyframes dash {
     0% {
       stroke-dashoffset: 1000;
     }
     100% {
       stroke-dashoffset: 0;
-    }
-  }
-
-  @-webkit-keyframes dash-check {
-    0% {
-      stroke-dashoffset: -100;
-    }
-    100% {
-      stroke-dashoffset: 900;
     }
   }
 
@@ -228,5 +208,34 @@
 
   span {
     margin-left: 20px;
+  }
+}
+
+.Form-bookButton {
+  @include body-copy;
+  color: $white;
+  opacity: 1;
+  border: thin solid $black;
+  border-radius: 5px;
+  padding: 7px 15px;
+  background: $orange;
+  transition: color $time;
+  cursor: pointer;
+  min-width: 90px;
+  min-height: 46.5px;
+
+  @include on-enter {
+    color: $blue;
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    border-color: rgba($black, 0.3);
+    cursor: default;
+  }
+
+  @include lg {
+    min-height: 57px;
+    min-width: 110px;
   }
 }

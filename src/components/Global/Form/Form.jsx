@@ -14,6 +14,7 @@ import * as emailjs from 'emailjs-com';
 import { hasStringValue, hasEmailValue } from '../../../utils/helpers';
 import CheckMark from '../../../assets/check-mark.svg';
 import Error from '../../../assets/error.svg';
+import Spinner from '../../Global/Spinner/Spinner';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -415,10 +416,10 @@ class Reservation extends Component {
                   <div className='Form-submitButton'>
                     <button
                       type='submit'
-                      className='BookButton'
+                      className='Form-bookButton'
                       disabled={ !form.getState().valid || submitting || formSent }
                     >
-                      { labels[locale].submitButton }
+                     { submitting ? <Spinner /> : labels[locale].submitButton }
                     </button>
                     { formSent && <div className='Form-submitMessage'>{ formSuccess ?
                         <Fragment> <CheckMark /> <span>{labels[locale].formMessage.success}</span></Fragment> :
