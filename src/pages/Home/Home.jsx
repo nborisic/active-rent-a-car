@@ -132,8 +132,6 @@ class Home extends Component {
       return null;
     }
 
-    console.log(homeData);
-
     const defLanguage = language ? language : 'sr';
 
     return (

@@ -86,9 +86,6 @@ class NavBar extends Component {
   handleInnerScroll = (itemId) => {
     this.forceCloseBurger();
 
-    console.log(itemId);
-
-
     scrollToElement(itemId);
   }
 

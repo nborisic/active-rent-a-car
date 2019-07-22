@@ -12,6 +12,8 @@ import Calendar from '../../../assets/calendar.svg';
 import Time from '../../../assets/time.svg';
 import * as emailjs from 'emailjs-com';
 import { hasStringValue, hasEmailValue } from '../../../utils/helpers';
+import CheckMark from '../../../assets/check-mark.svg';
+import Error from '../../../assets/error.svg';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -43,7 +45,11 @@ const labels = {
     rentalConditions: 'rental conditions',
     submitButton: 'Submit',
     accessories: 'Accessories',
-    requiredLabel: '* required fields'
+    requiredLabel: '* required fields',
+    formMessage: {
+      success: 'Reservation sent successfully!',
+      error: 'Something went wrong. Try again later...'
+    }
   },
   ['sr-Latn']: {
     title: 'Rezervacija',
@@ -69,11 +75,21 @@ const labels = {
     rentalConditions: 'uslovima najma',
     submitButton: 'Pošalji',
     accessories: 'Dodaci',
-    requiredLabel: '* obavezna polja'
+    requiredLabel: '* obavezna polja',
+    formMessage: {
+      success: 'Rezervacija je uspešno poslata!',
+      error: 'Nesto je pošlo po zlu, probajte opet...'
+    }
   }
 }
 
 class Reservation extends Component {
+  state = {
+    formSent: false,
+    formSuccess: false,
+    submitting: false,
+  }
+
   CheckboxGroup = ({ fields, options }) => {
     const toggle = (event, option) => {
       if (event.target.checked) {
@@ -253,6 +269,12 @@ class Reservation extends Component {
       language,
     } = this.props;
 
+    const {
+      formSent,
+      submitting,
+      formSuccess,
+    } = this.state;
+
     const conditionsLink = language === 'sr' ? 'uslovi' : 'conditions';
 
     const dropdowns = [
@@ -338,7 +360,7 @@ class Reservation extends Component {
             ...arrayMutators
           } }
           render={
-            ({ handleSubmit, form, submitting }) =>{
+            ({ handleSubmit, form }) =>{
               return (
                 <form onSubmit={ handleSubmit } autoComplete="off">
                   <Grid className='Form-container'>
@@ -390,13 +412,19 @@ class Reservation extends Component {
                       <div className='Form-required'>{ labels[locale].requiredLabel }</div>
                     </Col>
                   </Grid>
-              <button
-                type='submit'
-                className='BookButton'
-                disabled={ !form.getState().valid || submitting }
-              >
-                { labels[locale].submitButton }
-              </button>
+                  <div className='Form-submitButton'>
+                    <button
+                      type='submit'
+                      className='BookButton'
+                      disabled={ !form.getState().valid || submitting || formSent }
+                    >
+                      { labels[locale].submitButton }
+                    </button>
+                    { formSent && <div className='Form-submitMessage'>{ formSuccess ?
+                        <Fragment> <CheckMark /> <span>{labels[locale].formMessage.success}</span></Fragment> :
+                        <Fragment> <Error /> <span>{ labels[locale].formMessage.error }</span></Fragment>
+                      } </div> }
+                  </div>
             </form>)
             }
           }
@@ -406,6 +434,10 @@ class Reservation extends Component {
   }
 
   handleSubmit = (value, e) => {
+    this.setState({
+      submitting: true,
+    });
+
     var templateParams = {
       additions: value.additions ? value.additions.join(',', ', ') : '/',
       birthday: value.birthday,
@@ -424,15 +456,20 @@ class Reservation extends Component {
       telephone: value.telephone ? value.telephone : '/',
   };
 
-  console.log(templateParams);
+  const that = this;
 
-
-  emailjs.send('gmail', 'template_csYppzJ4', templateParams, 'user_UaMduedrdHDA2YXykZVnM')
-      .then(function(response) {
-         console.log('SUCCESS!', response.status, response.text);
-      }, function(error) {
-         console.log('FAILED...', error);
-      });
+  emailjs.send('gmail', 'template_csYppzJ4', templateParams, 'user_UaMduedrdHDA2YXykZVnM').then(function() {
+    that.setState({
+        formSent: true,
+        submitting: false,
+        formSuccess: true,
+      })
+    }, function(error) {
+      that.setState({
+        formSent: true,
+        submitting: false,
+      })
+    });
   }
 
   renderSelectOptions = (options) => {

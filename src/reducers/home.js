@@ -42,9 +42,6 @@ export const getHomeDataReducer = new Reducer('newsList', {
 
 const get = getHomeDataReducer.addAction('saveData', (state, action) => {
     const data = {};
-    console.log('actko  data',action.data);
-
-
     const locale = action.locale ? action.locale : 'sr-Latn';
 
     action.data.forEach(item => {
