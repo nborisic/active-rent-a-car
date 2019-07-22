@@ -90,6 +90,7 @@ class PriceList extends Component {
           <BookButton
             className='PriceList-bookButton'
             locale={ locale }
+            classToReserve={ car.class }
           />
         </Col>
       </Grid>

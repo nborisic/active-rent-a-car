@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import cx from 'classnames';
+import get from 'lodash/get';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Container from '../../Global/Container/Container';
 import Grid from '../../Global/Grid/Grid';
@@ -89,6 +91,7 @@ class Reservation extends Component {
     formSent: false,
     formSuccess: false,
     submitting: false,
+    reservedCar: null,
   }
 
   CheckboxGroup = ({ fields, options }) => {
@@ -160,7 +163,7 @@ class Reservation extends Component {
                       <label htmlFor={ dropdown.name }>{ labels[locale][`${ dropdown.name }Label`] }</label>
                     </Col>
                   }
-                  {labels[locale][`${ dropdown.name }Label`] ? <Col md={ 6 }>{ selectElement }</Col> : <Col>{ selectElement }</Col>}
+                  { labels[locale][`${ dropdown.name }Label`] ? <Col md={ 6 }>{ selectElement }</Col> : <Col>{ selectElement }</Col>}
                 </Grid>
               </div>
             )
@@ -357,6 +360,7 @@ class Reservation extends Component {
         <h2 className='Form-title'>{ labels[locale].title }</h2>
         <Form
           onSubmit={ this.handleSubmit }
+          initialValues={ { cars: this.props.reservationData[locale].reservedClass } }
           mutators={ {
             ...arrayMutators
           } }
@@ -488,5 +492,7 @@ class Reservation extends Component {
   }
 }
 
-export default Reservation;
+export default connect((state) => ({
+  reservationData: get(state, 'reservedClass.data', []),
+}))(Reservation);
 

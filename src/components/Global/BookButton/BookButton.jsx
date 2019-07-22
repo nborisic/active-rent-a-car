@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import cx from 'classnames';
 import { scrollToElement } from '../../../utils/helpers';
+import { getReservedClassData } from '../../../reducers/reservation';
 
 import './BookButton.scss';
 
@@ -16,7 +18,18 @@ const labelMapShort = {
 
 class BookButton extends Component {
   handleClick = () => {
+    const {
+      classToReserve,
+      dispatch,
+      locale,
+    } = this.props;
+
     scrollToElement('book');
+
+    if(classToReserve) {
+      dispatch(getReservedClassData(classToReserve, locale))
+    }
+
   }
 
   render() {
@@ -36,7 +49,7 @@ class BookButton extends Component {
           className='BookButton'
           onClick={ this.handleClick }
         >
-          <span className='BookButton-label'>{ isDiscount ? labelMap[locale] : labelMapShort[locale] }</span>
+          <span className='BookButton-label'>{ isDiscount ? labelMap[locale]  : labelMapShort[locale] }</span>
           <span className='BookButton-label--sm'>{ labelMap[locale] }</span>
         </button>
       </div>
@@ -45,5 +58,6 @@ class BookButton extends Component {
 }
 
 
-export default BookButton;
+export default connect((state) => ({
+}))(BookButton);
 
