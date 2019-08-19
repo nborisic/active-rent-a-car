@@ -16,6 +16,13 @@ class MetaData extends Component {
         <title>{ displayedPageTitle }</title>
         <meta name='description' content={ pageDescription } />
         <meta name='keywords' content={ pageKeywords } />
+        <meta name='distribution' content='global' />
+        <meta name='googlebot' content='noodp' />
+        <meta property='og:site_name' content='Active drive' />
+        <meta property='og:title' content={ displayedPageTitle } />
+        <meta property='og:description' content={ pageDescription } />
+        <meta property='og:image' content='https://photos.google.com/u/1/photo/AF1QipM2tDKMbHlh-_-CHQAI1N9s-5Uyf15LLn0-hK3P' />
+        <meta property='og:url' content='https://www.activedriverentacar.com/' />
       </Helmet>
     );
   }
