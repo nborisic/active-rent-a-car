@@ -23,7 +23,6 @@ class Swiper extends Component {
       return (
         <img
           key={ image.sys.id }
-          className='Carousel-image'
           src={`https:${ image.fields.file.url }`}
         />
       )
