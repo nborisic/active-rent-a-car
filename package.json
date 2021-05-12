@@ -58,7 +58,7 @@
     "redux-saga": "^1.0.5",
     "redux-spark": "0.0.5",
     "smoothscroll-polyfill": "^0.4.4",
-    "swiper": "^4.5.0",
+    "swiper": "^6.5.1",
     "validator": "^11.1.0"
   }
 }
