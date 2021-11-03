@@ -59,6 +59,6 @@
     "redux-spark": "0.0.5",
     "smoothscroll-polyfill": "^0.4.4",
     "swiper": "^4.5.0",
-    "validator": "^11.1.0"
+    "validator": "^13.7.0"
   }
 }
