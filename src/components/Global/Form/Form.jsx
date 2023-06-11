@@ -463,7 +463,7 @@ class Reservation extends Component {
 
   const that = this;
 
-  emailjs.send('gmail', 'template_csYppzJ4', templateParams, 'user_UaMduedrdHDA2YXykZVnM').then(function() {
+  emailjs.send('service_96mdauo', 'template_vmth6sv', templateParams, 'j_qmO-DERC2IHKjT5').then(function() {
     that.setState({
         formSent: true,
         submitting: false,
